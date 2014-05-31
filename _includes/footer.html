@@ -1,0 +1,18 @@
+  <footer class="row">
+    <div class="large-12 columns">
+      <hr/>
+      <div class="row">
+        <div class="large-4 columns center">
+          <p class="text-center">© Copyright <a href="mailto:{{ site.email }}">{{ site.authorname }}</a></p>
+        </div>
+        <div class="large-8 columns">
+          <p class="text-center">Crafted lovingly with help from <a href="http://jekyllrb.com/">jekyll</a> and <a href="http://foundation.zurb.com/">foundation</a>.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="{{ "/js/vendor/jquery.js" | prepend: site.baseurl }}"></script>
+  <script src="{{ "/js/foundation.min.js" | prepend: site.baseurl }}"></script>
+  <script>
+    $(document).foundation();
+  </script>
