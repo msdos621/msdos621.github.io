@@ -3,9 +3,9 @@
   <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Psychic Debugging</title>
+	<title>URL Encoder / Decoder Online Tool</title>
 	<link rel="stylesheet" href="/assets/css/psychic_debugging.css">
-	<link rel="canonical" href="http://psychicdebugging.com/">
+	<link rel="canonical" href="http://psychicdebugging.com/tools/url_encode_decode/">
 	<meta name="description" content="This is the portfolio / blog / space on the internet of Jeffery Yeary, a software architect with a passion for music, coding, fitness and art.">
 	<script src="/assets/js/vendor/modernizr.js"></script>
 	<script src="/assets/js/vendor/jquery.js"></script>
@@ -39,43 +39,41 @@
 
     <div class="row">
       <div class="large-9 columns" role="content">
-        <div class="home">
+        <article>
+ 	<h3>URL Encoder / Decoder Online Tool</h3>
+ 	
+	<p>
+Input any string of text and press encode or decode in order to url encode / decode the text.
+</p>
+<form>
+	<div class="row">
+		<div class="large-12 columns">
+		  <label>Text to encode / decode
+		    <textarea id="decode_box" rows="5"></textarea>
+		  </label>
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-12 large-6 columns">
+			<a href="#" id="encode" class="button expand">Encode</a>
+		</div>
+		<div class="small-12 large-6 columns">
+			<a href="#" id="decode" class="button expand">Decode</a>
+		</div>
+	</div>
+</form>
+<script>
+$(document).ready(function () {
+ 	$('#encode').click(function() {
+  		$('#decode_box').val(encodeURIComponent($('#decode_box').val()));
+	});
 
-  <h2>Posts</h2>
-
-  <ul class="posts">
-    
-      <li>
-        <span class="post-date">May 28, 2014</span>
-        <a class="post-link" href="/jekyll/update/2014/05/28/welcome-to-jekyll/">Welcome to Jekyll!</a>
-      </li>
-    
-      <li>
-        <span class="post-date">Nov 17, 2013</span>
-        <a class="post-link" href="/2013/11/17/setting-up-my-ruby-envrionment-ubuntu-13-10/">Setting up my ruby envrionment (Ubuntu 13.10)</a>
-      </li>
-    
-      <li>
-        <span class="post-date">Jul 13, 2013</span>
-        <a class="post-link" href="/2013/07/13/net-wrapper-for-pagerduty-api/">.Net wrapper for PagerDuty API </a>
-      </li>
-    
-      <li>
-        <span class="post-date">Jul 13, 2013</span>
-        <a class="post-link" href="/2013/07/13/new-module-for-superfeed/">New module for superfeed</a>
-      </li>
-    
-      <li>
-        <span class="post-date">Jul 7, 2013</span>
-        <a class="post-link" href="/2013/07/07/this-is-a-good-idea-i-know-i-lost-a-lot-of-hair/">This is a good idea</a>
-      </li>
-    
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
-
-</div>
-
+	$('#decode').click(function() {
+  		$('#decode_box').val(decodeURIComponent($('#decode_box').val()));
+	});
+ });
+</script>
+</article>
       </div>
           <aside class="large-3 columns">
  
