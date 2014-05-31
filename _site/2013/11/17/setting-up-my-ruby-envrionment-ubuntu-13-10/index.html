@@ -1,0 +1,155 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Setting up my ruby envrionment (Ubuntu 13.10)</title>
+	<link href='http://fonts.googleapis.com/css?family=Lato:300,700,300italic' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="/css/foundation.custom.min.css">
+	<link rel="canonical" href="http://psychicdebugging.com/2013/11/17/setting-up-my-ruby-envrionment-ubuntu-13-10/">
+	<meta name="description" content="This is the portfolio / blog / space on the internet of Jeffery Yeary, a software architect with a passion for music, coding, fitness and art.">
+	<script src="/js/vendor/modernizr.js"></script>
+</head>
+
+    <body>
+
+    <nav class="top-bar" data-topbar>
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="/">Psychic Debugging</a></h1>
+    </li>
+     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class="right">
+      <li class="has-dropdown">
+        <a href="#">Menu</a>
+        <ul class="dropdown">
+          <li><a href="/">Home</a></li>
+          
+          <li><a href="/about/">About</a></li>
+          
+          <li><a href="/feed.xml"></a></li>
+          
+          <li><a href="/"></a></li>
+          
+          <li><a href="/tags/">Tags</a></li>
+          
+        </ul>
+      </li>
+    </ul>
+  </section>
+</nav>
+
+    <div class="row">
+      <div class="large-12 columns" role="content">
+        <article>
+ 	<h3><a href="#">Setting up my ruby envrionment (Ubuntu 13.10)</a></h3>
+ 	<h6>Written by Jeffery Yeary on Nov 17, 2013</h6>
+	<p>My machine at home is a monster.  It has dual SSDs in a raid 0 config and a ton of ram.  It is basically a dream to code on.  I recently switched over to ubuntu since most of my development is shifting to ruby and I use a mac to develop at work.  My current stack is rbenv, phantomjs, nodejs, redis (for the session store / other stuff). I was surprised to find that it was actually easier to setup in linux than it was on my mac.Here are the steps I took for Ubuntu 13.10</p>
+
+<h6 id="first-install-rbenv">First install RBEnv</h6>
+
+<div class="highlight"><pre><code class="bash">git clone git://github.com/sstephenson/rbenv.git .rbenv
+<span class="nb">echo</span> <span class="s1">&#39;&#39;</span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;$HOME/.rbenv/bin:$PATH&quot;</span><span class="s1">&#39;&#39;</span> &gt;&gt; ~/.bashrc
+<span class="nb">echo</span> <span class="s1">&#39;&#39;</span><span class="nb">eval</span> <span class="s2">&quot;$(rbenv init -)&quot;</span><span class="s1">&#39;&#39;</span> &gt;&gt; ~/.bashrc</code></pre></div>
+
+<h6 id="install-ruby-build">Install ruby build</h6>
+
+<div class="highlight"><pre><code class="bash">git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+<span class="nb">echo</span> <span class="s1">&#39;&#39;</span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;$HOME/.rbenv/plugins/ruby-build/bin:$PATH&quot;</span><span class="s1">&#39;&#39;</span> &gt;&gt; ~/.bashrc</code></pre></div>
+
+<h6 id="install-your-chosen-version-of-ruby">Install your chosen version of Ruby</h6>
+
+<div class="highlight"><pre><code class="bash">rbenv install 1.9.3p448
+rbenv global 1.9.3p448
+ruby -v</code></pre></div>
+
+<h6 id="install-some-rails-prereqs-nodejs-for-the-asset-pipelinesince-ubuntu-1304-has-an-old-version-of-node-we-are-going-to-grab-one-from-chris-leas-repo">Install some rails prereqs (nodejs for the asset pipeline)Since Ubuntu 13.04 has an old version of Node we are going to grab one from Chris Lea’s repo</h6>
+
+<div class="highlight"><pre><code class="bash">sudo add-apt-repository ppa:chris-lea/node.js
+sudo apt-get update
+sudo apt-get install nodejs</code></pre></div>
+
+<h6 id="install-your-chosen-version-of-rails">Install your chosen version of Rails</h6>
+
+<div class="highlight"><pre><code class="bash">gem install rails
+rbenv rehash
+rails -v</code></pre></div>
+
+<h6 id="install-redis-for-your-session-store">Install redis (for your session store)</h6>
+
+<div class="highlight"><pre><code class="bash">sudo apt-get install tcl
+wget http://download.redis.io/redis-stable.tar.gz
+tar xvzf redis-stable.tar.gz
+<span class="nb">cd </span>redis-stable
+make
+<span class="nb">cd </span>src
+sudo cp redis-server /usr/local/bin/
+sudo cp redis-cli /usr/local/bin/
+<span class="nb">cd</span>
+rm -rf redis-stable
+rm redis-stable.tar.gz</code></pre></div>
+
+<h6 id="install-phantomjs-to-help-test-javascript">Install phantomjs (to help test javascript)</h6>
+
+<div class="highlight"><pre><code class="bash"><span class="nb">cd</span> /usr/local/share/
+sudo wget http://phantomjs.googlecode.com/files/phantomjs-1.8.1-linux-x86_64.tar.bz2
+sudo tar jxvf phantomjs-1.8.1-linux-x86_64.tar.bz2
+sudo ln -s /usr/local/share/phantomjs-1.8.1-linux-x86_64/ /usr/local/share/phantomjs
+sudo ln -s /usr/local/share/phantomjs/bin/phantomjs /usr/local/bin/phantomjs
+sudo rm phantomjs-1.8.1-linux-x86_64.tar.bz2</code></pre></div>
+
+<p>Congrats you are now ready to code some stuff.
+These commands were lovingly sourced from a lot of different places
+- Go Rails setup guide
+- Redis quick start guide
+- Phantom JS (codecuriosity.com)</p>
+
+</article>
+
+	
+    <ul class="inline">
+      
+      
+
+  
+     
+    	<li><a href="/tags/#programming-ref">programming <span>(2)</span></a></li>
+     
+    	<li><a href="/tags/#ruby-ref">ruby <span>(1)</span></a></li>
+     
+    	<li><a href="/tags/#code-ref">code <span>(1)</span></a></li>
+    
+  
+
+
+
+    </ul>
+  	  
+      </div>
+    </div>
+      <footer class="row">
+    <div class="large-12 columns">
+      <hr/>
+      <div class="row">
+        <div class="large-4 columns center">
+          <p class="text-center">© Copyright <a href="mailto:jeffery.yeary@gmail.com">Jeffery Yeary</a></p>
+        </div>
+        <div class="large-8 columns">
+          <p class="text-center">Crafted lovingly with help from <a href="http://jekyllrb.com/">jekyll</a> and <a href="http://foundation.zurb.com/">foundation</a>.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="/js/vendor/jquery.js"></script>
+  <script src="/js/foundation.min.js"></script>
+  <script>
+    $(document).foundation();
+  </script>
+
+    </body>
+</html>
