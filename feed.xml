@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Psychic Debugging</title>
+    <title>Debug Ninja</title>
     <description>This is the portfolio / blog / space on the internet of Jeffery Yeary, a software architect with a passion for music, coding, fitness and art.</description>
-    <link>http://psychicdebugging.com/</link>
-    <atom:link href="http://psychicdebugging.com/feed.xml" rel="self" type="application/rss+xml" />
+    <link>http://debug.ninja/</link>
+    <atom:link href="http://debug.ninja/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
         <title>Welcome to Jekyll!</title>
@@ -23,8 +23,8 @@ To add new posts, simply add a file in the &lt;code&gt;_posts&lt;/code&gt; direc
 
 </description>
         <pubDate>Wed, 28 May 2014 14:46:02 -0400</pubDate>
-        <link>http://psychicdebugging.com/jekyll/update/2014/05/28/welcome-to-jekyll/</link>
-        <guid isPermaLink="true">http://psychicdebugging.com/jekyll/update/2014/05/28/welcome-to-jekyll/</guid>
+        <link>http://debug.ninja/jekyll/update/2014/05/28/welcome-to-jekyll/</link>
+        <guid isPermaLink="true">http://debug.ninja/jekyll/update/2014/05/28/welcome-to-jekyll/</guid>
       </item>
     
       <item>
@@ -90,8 +90,8 @@ These commands were lovingly sourced from a lot of different places
 - Phantom JS (codecuriosity.com)&lt;/p&gt;
 </description>
         <pubDate>Sun, 17 Nov 2013 00:39:00 -0500</pubDate>
-        <link>http://psychicdebugging.com/2013/11/17/setting-up-my-ruby-envrionment-ubuntu-13-10/</link>
-        <guid isPermaLink="true">http://psychicdebugging.com/2013/11/17/setting-up-my-ruby-envrionment-ubuntu-13-10/</guid>
+        <link>http://debug.ninja/2013/11/17/setting-up-my-ruby-envrionment-ubuntu-13-10/</link>
+        <guid isPermaLink="true">http://debug.ninja/2013/11/17/setting-up-my-ruby-envrionment-ubuntu-13-10/</guid>
       </item>
     
       <item>
@@ -105,8 +105,8 @@ These commands were lovingly sourced from a lot of different places
 
 </description>
         <pubDate>Sat, 13 Jul 2013 17:12:14 -0400</pubDate>
-        <link>http://psychicdebugging.com/2013/07/13/net-wrapper-for-pagerduty-api/</link>
-        <guid isPermaLink="true">http://psychicdebugging.com/2013/07/13/net-wrapper-for-pagerduty-api/</guid>
+        <link>http://debug.ninja/2013/07/13/net-wrapper-for-pagerduty-api/</link>
+        <guid isPermaLink="true">http://debug.ninja/2013/07/13/net-wrapper-for-pagerduty-api/</guid>
       </item>
     
       <item>
@@ -168,18 +168,18 @@ These commands were lovingly sourced from a lot of different places
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 </description>
         <pubDate>Sat, 13 Jul 2013 16:24:24 -0400</pubDate>
-        <link>http://psychicdebugging.com/2013/07/13/new-module-for-superfeed/</link>
-        <guid isPermaLink="true">http://psychicdebugging.com/2013/07/13/new-module-for-superfeed/</guid>
+        <link>http://debug.ninja/2013/07/13/new-module-for-superfeed/</link>
+        <guid isPermaLink="true">http://debug.ninja/2013/07/13/new-module-for-superfeed/</guid>
       </item>
     
       <item>
         <title>This is a good idea</title>
         <description>&lt;p&gt;This is a good idea, I know I lost a lot of hair when dealing with VB6 so it only makes sense that you could also use it for weight loss.  Truly Microsoft will never be able to kill it.
-&lt;img src=&quot;http://psychicdebugging.com/assets/images/vb6.jpg&quot; alt=&quot;VB6&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://debug.ninja/assets/images/vb6.jpg&quot; alt=&quot;VB6&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Sun, 07 Jul 2013 17:42:22 -0400</pubDate>
-        <link>http://psychicdebugging.com/2013/07/07/this-is-a-good-idea-i-know-i-lost-a-lot-of-hair/</link>
-        <guid isPermaLink="true">http://psychicdebugging.com/2013/07/07/this-is-a-good-idea-i-know-i-lost-a-lot-of-hair/</guid>
+        <link>http://debug.ninja/2013/07/07/this-is-a-good-idea-i-know-i-lost-a-lot-of-hair/</link>
+        <guid isPermaLink="true">http://debug.ninja/2013/07/07/this-is-a-good-idea-i-know-i-lost-a-lot-of-hair/</guid>
       </item>
     
   </channel>
