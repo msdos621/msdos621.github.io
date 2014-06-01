@@ -1,10 +1,10 @@
 # Site settings
-title: Psychic Debugging
+title: Debug Ninja
 email: jeffery.yeary@gmail.com
 authorname: Jeffery Yeary
 description: "This is the portfolio / blog / space on the internet of Jeffery Yeary, a software architect with a passion for music, coding, fitness and art."
 baseurl: ""
-url: "http://psychicdebugging.com"
+url: "http://debug.ninja"
 
 # Build settings
 markdown: kramdown
