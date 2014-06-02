@@ -29,6 +29,7 @@
         <ul class="dropdown">
           <li><a href="/">Home</a></li>
           <li><a href="/about/">About Me</a></li>
+          <li><a href="/blog/">All Posts</a></li>
           <li><a href="/tools/">Online Tools</a></li>
           <li><a href="/tags/">Tags</a></li>
         </ul>
@@ -97,12 +98,13 @@ $(document).ready(function () {
 
 
 
+        <li><a href="/blog/">All Posts →</a></li>
       </ul>
- 
-      <div class="panel">
-        <img src="https://pbs.twimg.com/profile_images/449574791498854400/KnyuuQ2g_bigger.jpeg" alt="Selfie" />
-        <h5>Hi I'm Jeff,</h5>
-          <p>I am a software architect with a passion for music, coding, fitness and art.  This is my portfolio / blog / space on the internet.</p>
+
+      <div class="panel text-center">
+        <img src="/assets/images/silly_hat_400x400.jpeg" alt="Selfie" />
+        <h5 class="text-left">Hi I'm Jeff,</h5>
+          <p class="text-left">I am a software architect with a passion for music, coding, fitness and art.  This is my portfolio / blog / space on the internet.</p>
           <hr />
           <a href="/about/">See More →</a>
       </div>
@@ -129,12 +131,20 @@ $(document).ready(function () {
     <div class="large-12 columns">
       <hr/>
       <div class="row">
-        <div class="large-4 columns center">
+        <div class="large-3 columns">
           <p class="text-center">© Copyright <a href="mailto:jeffery.yeary@gmail.com">Jeffery Yeary</a></p>
         </div>
-        <div class="large-8 columns">
+        <div class="large-2 columns">
+          <p class="text-center">Subscribe <a href="/feed.xml">via RSS</a></p>
+        </div>
+        <div class="large-7 columns">
           <p class="text-center">Crafted lovingly with help from <a href="http://jekyllrb.com/">jekyll</a> and <a href="http://foundation.zurb.com/">foundation</a>.</p>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-12 columns right">
+
       </div>
     </div>
   </footer>
