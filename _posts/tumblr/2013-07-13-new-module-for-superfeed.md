@@ -3,10 +3,14 @@ layout: post
 author: Jeffery Yeary
 title: New module for superfeed
 date: '2013-07-13T16:24:24-04:00'
-tags: []
+tags:
+- c#
+- code
 tumblr_url: http://psychicdebugging.tumblr.com/post/55363919097/new-module-for-superfeed
 ---
-My buddy Will has a pretty neat piece of software that combines all of his social feeds up on github.  I decided to fork it and add a new module for last.fm.  Its super easy to add a new feed type (see code below):
+My buddy <a href="http://codersblock.com/">Will</a> has a <a href="https://github.com/lonekorean/super-feed">pretty neat piece of software</a> that combines
+all of his social feeds up on github.  I decided to fork it and add a new module for last.fm.  
+Its super easy to add a new feed type (see code below):
 
 {% highlight csharp %}
 {% raw %} 

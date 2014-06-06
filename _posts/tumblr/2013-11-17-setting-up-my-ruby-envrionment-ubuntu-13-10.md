@@ -6,7 +6,6 @@ date: '2013-11-17T00:39:00-05:00'
 tags:
 - programming
 - ruby
-- code
 tumblr_url: http://psychicdebugging.tumblr.com/post/67229039192/setting-up-my-ruby-envrionment-ubuntu-13-10
 ---
 My machine at home is a monster.  It has dual SSDs in a raid 0 config and a ton of ram.  It is basically a dream to code on.  I recently switched over to ubuntu since most of my development is shifting to ruby and I use a mac to develop at work.  My current stack is rbenv, phantomjs, nodejs, redis (for the session store / other stuff). I was surprised to find that it was actually easier to setup in linux than it was on my mac.Here are the steps I took for Ubuntu 13.10
