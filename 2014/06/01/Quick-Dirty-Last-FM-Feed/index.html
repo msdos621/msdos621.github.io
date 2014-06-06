@@ -1,0 +1,157 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Quick and Dirty Last FM Feed parsing in ruby</title>
+	<link rel="stylesheet" href="/assets/css/psychic_debugging.css">
+	<link rel="canonical" href="http://debug.ninja/2014/06/01/Quick-Dirty-Last-FM-Feed/">
+	<meta name="description" content="This is the portfolio / blog / space on the internet of Jeffery Yeary, a software architect with a passion for music, coding, fitness and art.">
+	<script src="/assets/js/vendor/modernizr.js"></script>
+	<script src="/assets/js/vendor/jquery.js"></script>
+</head>
+
+    <body>
+
+    <nav class="top-bar" data-topbar>
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="/">Debug Ninja</a></h1>
+    </li>
+    <li class="toggle-topbar menu"><a href="#">Menu</a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class="right">
+      <li class="has-dropdown">
+        <a href="#">Menu</a>
+        <ul class="dropdown">
+          <li><a href="/">Home</a></li>
+          <li><a href="/about/">About Me</a></li>
+          <li><a href="/blog/">All Posts</a></li>
+          <li><a href="/tools/">Online Tools</a></li>
+          <li><a href="/tags/">Tags</a></li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+</nav>
+
+    <div class="row">
+      <div class="large-12 columns" role="content">
+        <article>
+ 	<h3><a href="#">Quick and Dirty Last FM Feed parsing in ruby</a></h3>
+ 	<h6>Written by Jeffery Yeary on Jun 1, 2014</h6>
+	<p>I am in the process of writing a Jekyll plugin to display information from my social feeds.
+Think of it like a life stream or an aggregation of my public internet presence.
+Here is an example of my parsing my most recent tracks on last fm.</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">FeedItem</span>
+  <span class="kp">extend</span> <span class="no">Forwardable</span>
+  <span class="kp">attr_accessor</span> <span class="ss">:source_name</span><span class="p">,</span> <span class="ss">:published</span><span class="p">,</span> <span class="ss">:title</span><span class="p">,</span> <span class="ss">:snippet</span><span class="p">,</span> <span class="ss">:image_preview_uri</span><span class="p">,</span> <span class="ss">:weight</span>
+
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">options</span> <span class="o">=</span> <span class="p">{})</span>
+    <span class="vi">@options</span> <span class="o">=</span> <span class="no">OpenStruct</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+    <span class="nb">self</span><span class="o">.</span><span class="n">class</span><span class="o">.</span><span class="n">instance_eval</span> <span class="k">do</span>
+      <span class="n">def_delegators</span> <span class="ss">:@options</span><span class="p">,</span> <span class="o">*</span><span class="n">options</span><span class="o">.</span><span class="n">keys</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">to_liquid</span>
+    <span class="p">{</span>
+      <span class="s1">&#39;source_name&#39;</span>    <span class="o">=&gt;</span>    <span class="n">source_name</span><span class="p">,</span>
+      <span class="s1">&#39;published&#39;</span> <span class="o">=&gt;</span>          <span class="n">published</span><span class="p">,</span>
+      <span class="s1">&#39;title&#39;</span>       <span class="o">=&gt;</span>     <span class="n">title</span><span class="p">,</span>
+      <span class="s1">&#39;snippet&#39;</span>     <span class="o">=&gt;</span>       <span class="n">snippet</span><span class="p">,</span>
+      <span class="s1">&#39;image_preview_uri&#39;</span> <span class="o">=&gt;</span> <span class="n">image_preview_uri</span><span class="p">,</span>
+      <span class="s1">&#39;weight&#39;</span>       <span class="o">=&gt;</span>     <span class="n">weight</span>
+    <span class="p">}</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">LastFMFeed</span>
+  <span class="kp">extend</span> <span class="no">Forwardable</span>
+  <span class="kp">attr_accessor</span> <span class="ss">:username</span><span class="p">,</span> <span class="ss">:apikey</span>
+
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">options</span> <span class="o">=</span> <span class="p">{})</span>
+    <span class="vi">@options</span> <span class="o">=</span> <span class="no">OpenStruct</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+    <span class="nb">self</span><span class="o">.</span><span class="n">class</span><span class="o">.</span><span class="n">instance_eval</span> <span class="k">do</span>
+      <span class="n">def_delegators</span> <span class="ss">:@options</span><span class="p">,</span> <span class="o">*</span><span class="n">options</span><span class="o">.</span><span class="n">keys</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">feed</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&amp;user=</span><span class="si">#{</span><span class="n">username</span><span class="si">}</span><span class="s2">&amp;api_key=</span><span class="si">#{</span><span class="n">apikey</span><span class="si">}</span><span class="s2">&amp;format=json&amp;limit=200&quot;</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="no">URI</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">url</span><span class="p">))</span> <span class="c1"># get_response takes an URI object</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
+    <span class="n">tracks</span> <span class="o">=</span> <span class="n">data</span><span class="o">[</span><span class="s1">&#39;recenttracks&#39;</span><span class="o">][</span><span class="s1">&#39;track&#39;</span><span class="o">]</span>
+    <span class="n">parsed_tracks</span> <span class="o">=</span> <span class="o">[]</span>
+    <span class="n">tracks</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">track</span><span class="o">|</span>
+      <span class="n">publish_date</span> <span class="o">=</span> <span class="no">DateTime</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">to_time</span>
+      <span class="n">publish_date</span> <span class="o">=</span> <span class="no">DateTime</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">track</span><span class="o">[</span><span class="s1">&#39;date&#39;</span><span class="o">][</span><span class="s1">&#39;#text&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">to_time</span> <span class="k">if</span> <span class="n">track</span><span class="o">[</span><span class="s1">&#39;date&#39;</span><span class="o">]</span>
+      <span class="n">item</span> <span class="o">=</span> <span class="no">FeedItem</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:source_name</span>        <span class="o">=&gt;</span> <span class="s1">&#39;Last FM&#39;</span><span class="p">,</span>
+                          <span class="ss">:title</span>              <span class="o">=&gt;</span> <span class="s2">&quot;Played: </span><span class="si">#{</span><span class="n">track</span><span class="o">[</span><span class="s1">&#39;artist&#39;</span><span class="o">][</span><span class="s1">&#39;#text&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2"> - </span><span class="si">#{</span><span class="n">track</span><span class="o">[</span><span class="s1">&#39;name&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                          <span class="ss">:snippet</span>            <span class="o">=&gt;</span>  <span class="s2">&quot;from the album </span><span class="si">#{</span><span class="n">track</span><span class="o">[</span><span class="s1">&#39;album&#39;</span><span class="o">][</span><span class="s1">&#39;#text&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                          <span class="ss">:image_preview_uri</span>  <span class="o">=&gt;</span> <span class="n">track</span><span class="o">[</span><span class="s1">&#39;image&#39;</span><span class="o">][</span><span class="mi">1</span><span class="o">][</span><span class="s1">&#39;#text&#39;</span><span class="o">]</span><span class="p">,</span>
+                          <span class="ss">:published</span>          <span class="o">=&gt;</span> <span class="n">publish_date</span><span class="p">)</span>
+
+      <span class="n">parsed_tracks</span><span class="o">.</span><span class="n">push</span> <span class="n">item</span>
+    <span class="k">end</span>
+    <span class="n">parsed_tracks</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
+
+<p>You can follow my progress by watching <a href="https://github.com/usbsnowcrash/usbsnowcrash.github.io/tree/superfeed_plugin">this branch here</a></p>
+
+</article>
+
+	
+    <ul class="inline">
+      
+      
+
+  
+     
+    	<li><a href="/tags/#jekyll-ref">jekyll <span>(1)</span></a></li>
+     
+    	<li><a href="/tags/#ruby-ref">ruby <span>(2)</span></a></li>
+     
+    	<li><a href="/tags/#code-ref">code <span>(3)</span></a></li>
+    
+  
+
+
+
+    </ul>
+  	  
+      </div>
+    </div>
+      <footer class="row">
+    <div class="large-12 columns">
+      <hr/>
+      <div class="row">
+        <div class="large-3 columns">
+          <p class="text-center">© Copyright <a href="mailto:jeffery.yeary@gmail.com">Jeffery Yeary</a></p>
+        </div>
+        <div class="large-2 columns">
+          <p class="text-center">Subscribe <a href="/feed.xml">via RSS</a></p>
+        </div>
+        <div class="large-7 columns">
+          <p class="text-center">Crafted lovingly with help from <a href="http://jekyllrb.com/">jekyll</a> and <a href="http://foundation.zurb.com/">foundation</a>.</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-12 columns right">
+
+      </div>
+    </div>
+  </footer>
+  <script src="/assets/js/foundation.min.js"></script>
+  <script>
+    $(document).foundation();
+  </script>
+
+    </body>
+</html>
