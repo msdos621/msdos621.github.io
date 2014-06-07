@@ -89,8 +89,8 @@ module SuperFeed
 
   class FeedAggregator
     def latest_items
-      LastFMFeed.new(:username => 'usbsnowcrash', :apikey => '25121b1fa3ed5de846be9573da41d858').feed
-      InstagramFeed.new(:username => '54558149', :apikey => '54558149.d7db0f4.d191ec27552741fba71e23d7748307d7').feed
+      LastFMFeed.new(:username => 'usbsnowcrash', :apikey => '').feed
+      InstagramFeed.new(:username => '54558149', :apikey => '').feed
     end
    end
  end
