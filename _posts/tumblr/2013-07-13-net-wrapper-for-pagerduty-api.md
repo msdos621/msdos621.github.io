@@ -3,10 +3,14 @@ layout: post
 author: Jeffery Yeary
 title: ! '.Net wrapper for PagerDuty API '
 date: '2013-07-13T17:12:14-04:00'
-tags: []
+tags:
+- c#
+- code
 tumblr_url: http://psychicdebugging.tumblr.com/post/55367079104/net-wrapper-for-pagerduty-api
 ---
-.Net wrapper for PagerDuty API I have just published my first pass at a .net wrapper for talking to the pager duty api.  The source is on github and the package is up on nuget.org.  Here is a quick example of usage:
+.Net wrapper for PagerDuty API I have just published my first pass at a .net wrapper for talking to the pager duty api.
+The source is on [github](https://github.com/usbsnowcrash/PagerDuty.Net) and the
+[package](https://www.nuget.org/packages/PagerDutyNet/) is up on nuget.org.  Here is a quick example of usage:
 
 {% highlight csharp %}
 {% raw %} 
