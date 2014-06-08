@@ -11,7 +11,12 @@
       </div>
     </div>
   </footer>
-  <script src="/assets/js/foundation.min.js"></script>
+{% javascript_asset_tag global %}
+- /_assets/js/vendor/modernizr.js
+- /_assets/js/vendor/jquery.js
+- /_assets/js/foundation.min.js
+- /_assets/js/url_encode_decode.js
+{% endjavascript_asset_tag %}  
   <script>
     $(document).foundation();
   </script>
