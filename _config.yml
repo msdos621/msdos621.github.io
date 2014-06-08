@@ -6,6 +6,9 @@ description: "This is the portfolio / blog / space on the internet of Jeffery Ye
 baseurl: ""
 url: "http://debug.ninja"
 
+gems:
+  - jekyll-sitemap
+
 # Build settings
 markdown: kramdown
 permalink: pretty
