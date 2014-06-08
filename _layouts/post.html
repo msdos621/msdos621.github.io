@@ -6,11 +6,11 @@ layout: default
  	<h6>Written by {{ page.author }} on {{ page.date | date: "%b %-d, %Y" }}</h6>
     <hr />
 	{{ content }}
-</article>
-
 	{% unless page.tags == empty %}
-    <ul class="inline">
-      {% assign tags_list = page.tags %}
-      {% include tagsforpost.html %}
+ 	<ul class="inline-list right">
+ 		<li>Filed under:</li>
+      	{% assign tags_list = page.tags %}
+      	{% include tagsforpost.html %}
     </ul>
-  	{% endunless %}  
+  	{% endunless %} 
+</article>
