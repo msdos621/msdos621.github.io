@@ -1,0 +1,304 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>My Jekyll Workflow</title>
+	<link rel="stylesheet" href="/assets/css/psychic_debugging.css">
+	<link rel="canonical" href="http://debug.ninja/2014/06/07/My-Jekyll-Workflow/">
+	<meta name="description" content="This is the portfolio / blog / space on the internet of Jeffery Yeary, a software architect with a passion for music, coding, fitness and art.">
+	<script src="/assets/js/vendor/modernizr.js"></script>
+	<script src="/assets/js/vendor/jquery.js"></script>
+</head>
+
+    <body>
+
+    <nav class="top-bar" data-topbar>
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="/">Debug Ninja</a></h1>
+    </li>
+    <li class="toggle-topbar menu"><a href="#">Menu</a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class="right">
+      <li class="has-dropdown">
+        <a href="#">Menu</a>
+        <ul class="dropdown">
+          <li><a href="/">Home</a></li>
+          <li><a href="/about/">About Me</a></li>
+          <li><a href="/blog/">All Posts</a></li>
+          <li><a href="/tools/">Online Tools</a></li>
+          <li><a href="/tags/">Tags</a></li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+</nav>
+
+    <div class="row">
+      <div class="small-12 medium-9 columns" role="content">
+        <article>
+ 	<h3><a href="#">My Jekyll Workflow</a></h3>
+ 	<h6>Written by Jeffery Yeary on Jun 7, 2014</h6>
+    <hr />
+	<h5 id="my-blog-setup">My Blog setup</h5>
+<p>I use <a href="https://pages.github.com/">github pages</a> to host my blog.  It is free, its fast and since this is a programming related blog it makes sense.  Also it means, right out of the box, I have source control which I think is neat. I can also publish my blog from any machine with git access (pretty much all my machines).  Another bonus is that every time I work on my blog my github stats are updated which makes me look a lot more active on github.  Finally they support custom domains out of the box so I could purchase this sweet .ninja domain.</p>
+
+<h5 id="frontend-setup">Frontend setup</h5>
+<p>I chose to use the <a href="http://foundation.zurb.com/">foundation grid system</a> because we use it at work (<a href="http://m.careerbuilder.com">check it out</a>) and it seemed a lot less complicated than twitter bootstrap.  I really like the simplicity of making a page look good on different screen sizes.  All I have to remember is that I should always add up to twelve columns.  On larger screens I have a navigation bar on the right, on tablets the stuff in the right column slides underneath and splits to be side by side.  On phones the panels from the size bar stack on top of each other instead of sitting beside each other.  This is how I set it up:</p>
+
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;row&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;small-12 medium-9 columns&quot;</span> <span class="na">role=</span><span class="s">&quot;content&quot;</span><span class="nt">&gt;</span>
+        {{ content goes here }}
+      <span class="nt">&lt;/div&gt;</span>
+        <span class="c">&lt;!-- Side navigation, on a large screen we float it to the side.  On a phone and tablet we want the entire navigation panel to slide underneath the content --&gt;</span>
+        <span class="nt">&lt;aside</span> <span class="na">class=</span><span class="s">&quot;small-12 large-3 columns&quot;</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;row&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;small-12 columns&quot;</span><span class="nt">&gt;</span>
+              <span class="nt">&lt;h5&gt;</span>Posts by Tag<span class="nt">&lt;/h5&gt;</span>
+              <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">&quot;inline-list&quot;</span><span class="nt">&gt;</span>
+                {% assign tags_list = site.tags %}  
+                {% include taghelper.html %}
+                <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/blog/&quot;</span><span class="nt">&gt;</span>All Posts →<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+              <span class="nt">&lt;/ul&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+            <span class="c">&lt;!-- On a phone we take the entire width because the whole left column is stacked underneath the content--&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;small-12 medium-6 large-12 columns&quot;</span><span class="nt">&gt;</span>
+              <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;panel text-center&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;/about/&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;/assets/images/selfie.png&quot;</span> <span class="na">alt=</span><span class="s">&quot;Selfie&quot;</span> <span class="nt">/&gt;&lt;/a&gt;</span>
+                <span class="nt">&lt;h5</span> <span class="na">class=</span><span class="s">&quot;text-left&quot;</span><span class="nt">&gt;</span>Hi I&#39;m Jeff,<span class="nt">&lt;/h5&gt;</span>
+                  <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;text-left&quot;</span><span class="nt">&gt;</span>I am a software architect with a passion for music, coding, fitness and art.  This is my portfolio / blog / space on the internet.<span class="nt">&lt;/p&gt;</span>
+                  <span class="nt">&lt;hr</span> <span class="nt">/&gt;</span>
+                  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;/about/&quot;</span><span class="nt">&gt;</span>See More →<span class="nt">&lt;/a&gt;</span>
+              <span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+            <span class="c">&lt;!-- On a tablet we put the two parts of the navigation side by side since we have extra realestate --&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;small-12 medium-6 large-12 columns&quot;</span><span class="nt">&gt;</span>
+              <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;panel&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;h5&gt;</span>Digital Footprints<span class="nt">&lt;/h5&gt;</span>
+                <span class="nt">&lt;hr</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">&quot;small-block-grid-6 medium-block-grid-3 large-block-grid-3&quot;</span><span class="nt">&gt;</span>
+                  <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://8tracks.com/usbsnowcrash&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;/assets/images/social/8tracks.png&quot;</span><span class="nt">&gt;&lt;/a&gt;&lt;/li&gt;</span>
+                  <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://instagram.com/usbsnowcrash&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;/assets/images/social/instagram.png&quot;</span><span class="nt">&gt;&lt;/a&gt;&lt;/li&gt;</span>
+                  <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://www.last.fm/user/usbsnowcrash&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;/assets/images/social/lastfm.png&quot;</span><span class="nt">&gt;&lt;/a&gt;&lt;/li&gt;</span>
+                  <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://lnkd.in/NWMsmR&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;/assets/images/social/linkedin.png&quot;</span><span class="nt">&gt;&lt;/a&gt;&lt;/li&gt;</span>
+                  <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://www.pinterest.com/jefferyyeary/&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;/assets/images/social/pinterest.png&quot;</span><span class="nt">&gt;&lt;/a&gt;&lt;/li&gt;</span>
+                  <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{ &quot;</span><span class="err">/</span><span class="na">feed</span><span class="err">.</span><span class="na">xml</span><span class="err">&quot;</span> <span class="err">|</span> <span class="na">prepend:</span> <span class="na">site</span><span class="err">.</span><span class="na">baseurl</span> <span class="err">}}&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;/assets/images/social/rss.png&quot;</span><span class="nt">&gt;&lt;/a&gt;&lt;/li&gt;</span>
+                  <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;https://twitter.com/usbsnowcrash&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;/assets/images/social/twitter.png&quot;</span><span class="nt">&gt;&lt;/a&gt;&lt;/li&gt;</span>
+                  <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://www.youtube.com/user/usbsnowcrash&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;/assets/images/social/youtube.png&quot;</span><span class="nt">&gt;&lt;/a&gt;&lt;/li&gt;</span>
+                <span class="nt">&lt;/ul&gt;</span>
+              <span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+          <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;/aside&gt;</span>
+    <span class="nt">&lt;/div&gt;</span></code></pre></div>
+
+<p>Since this is a coding blog I wanted to make sure that code looked pretty.  Jekyll ships with pretty good <a href="http://jekyllrb.com/docs/posts/">highlighting ability</a> built on pygments and I was able to theme it by adding the styles found in one of the themes from the <a href="http://richleland.github.io/pygments-css/">pygments website</a>.</p>
+
+<p>I also wanted a nice readable font so I hopped over to <a href="https://www.google.com/fonts">google fonts</a> and browsed around until I found one I liked.  I chose Lato which is what we use for our mobile site at work so I probobally just like it because it seems familiar.</p>
+
+<h5 id="speeding-things-up">Speeding things up</h5>
+<p>For speed purposes I wanted my CSS and JS combined and minified and served from one domain.  I could have had this be part of my publishing script but I figured why bother when I can have that done automagically for me.  So I signed up for <a href="http://www.cloudflare.com">cloudflare</a>, which in addition to acting as a free CDN and free DNS provider, will also optimize your CSS and JS for you.  </p>
+
+<p><img src="/assets/images/cloudflare_magic.png" alt="Cloudflare Magic" /></p>
+
+<p>They basically act as a giant reverse proxy between your website and the users that can rewrite your html as well as serve your assets from a server closer to the user.</p>
+
+<h5 id="serving-my-blog-without-prepending-www">Serving my blog without prepending WWW</h5>
+<p>So github supports CNAME setups but by default you cannot have the root domain be a CNAME.  So I created an A record that points to the IP address of github.com which I got by pinging the non-friendly url for my github page </p>
+
+<div class="highlight"><pre><code class="bash">Jefferys-iMac:blog jyeary<span class="nv">$ </span>ping usbsnowcrash.github.io
+PING github.map.fastly.net <span class="o">(</span>199.27.73.133<span class="o">)</span>: 56 data bytes
+64 bytes from 199.27.73.133: <span class="nv">icmp_seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>58 <span class="nb">time</span><span class="o">=</span>30.601 ms</code></pre></div>
+
+<p>Here is what that setup looks like in the cloudflare control panel.</p>
+
+<p><img src="/assets/images/cloudflare-dns.png" alt="DNS Setup" /></p>
+
+<p>This means if someone types debug.ninja into thier browser bar it resolves to github’s servers which understand that they need to serve the contents from my personal github profile.  However I wanted to make sure that if someone did type in www.debug.ninja out of habit it would still work.  So I set that up as a CNAME record of the root domain as shown above.</p>
+
+<h5 id="customizing-jekyll">Customizing Jekyll</h5>
+<p>My blog was originally hosted on tumblr and I really liked the way you tagged posts there.  Jekyll allows you add any meta data you want to your posts so I added tags.  Here is what the top of this post looks like in source control</p>
+
+<div class="highlight"><pre><code class="bash">---
+layout: post
+title:  My Jekyll Workflow
+author: Jeffery Yeary
+date:   2014-06-07 10:45:00
+tags:
+- jekyll
+- bash
+- code
+---</code></pre></div>
+
+<p>I then borrowed some code from the <a href="http://jekyllbootstrap.com/">jekyll bootstrap project</a> to generate a list of tags on each post as well as a tags page that shows how many posts each individual tag has.  This is what the include file looks like to generate a list of tags:</p>
+
+<div class="highlight"><pre><code class="html">{% comment %}<span class="c">&lt;!--</span>
+<span class="c">Taken from Jekyll Bootstrap!</span>
+<span class="c">The tags_list include is a listing helper for tags.</span>
+<span class="c">Usage:</span>
+<span class="c">  1) assign the &#39;tags_list&#39; variable to a valid array of tags.</span>
+<span class="c">  2) include taghelper</span>
+<span class="c">  example:</span>
+<span class="c">    &lt;ul&gt;</span>
+<span class="c">      {% assign tags_list = site.tags %}  </span>
+<span class="c">      {% include taghelper %}</span>
+<span class="c">    &lt;/ul&gt;</span>
+<span class="c">  </span>
+<span class="c">  Notes: </span>
+<span class="c">    Tags can be either a Hash of tag objects (hashes) or an Array of tag-names (strings).</span>
+<span class="c">    The encapsulating &#39;if&#39; statement checks whether tags_list is a Hash or Array.</span>
+<span class="c">    site.tags is a Hash while page.tags is an array.</span>
+<span class="c">--&gt;</span>{% endcomment %}
+
+  {% if tags_list.first[0] == null %}
+    {% for tag in tags_list %} 
+      <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{ BASE_PATH }}/tags/#{{ tag }}-ref&quot;</span><span class="nt">&gt;</span>{{ tag }} <span class="nt">&lt;span&gt;</span>({{ site.tags[tag].size }})<span class="nt">&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;</span>
+    {% endfor %}
+  {% else %}
+    {% for tag in tags_list %} 
+      <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{ BASE_PATH }}/tags/#{{ tag[0] }}-ref&quot;</span><span class="nt">&gt;</span>{{ tag[0] }} <span class="nt">&lt;span&gt;</span>({{ tag[1].size }})<span class="nt">&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;</span>
+    {% endfor %}
+  {% endif %}
+
+{% assign tags_list = nil %}</code></pre></div>
+
+<p>This is an example of how I list the tags in the navigation bar on the right:</p>
+
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">&quot;inline-list&quot;</span><span class="nt">&gt;</span>
+{% assign tags_list = site.tags %}  
+{% include taghelper.html %}
+<span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/blog/&quot;</span><span class="nt">&gt;</span>All Posts →<span class="nt">&lt;/a&gt;</span></code></pre></div>
+
+<h5 id="publishing-my-blog">Publishing my blog</h5>
+<p>Github pages supports jekyll out of the box so you can really easily publish a site by simply pushing up the contents of your jekyll directory.  However, this does not allow you to run any custom plugins due to security concerns on github’s side.  In order to get around this I created two branches for my blog.  The first branch is the <a href="https://github.com/usbsnowcrash/usbsnowcrash.github.io">master branch</a> and it will contain the generated site.  The second branch is called <a href="https://github.com/usbsnowcrash/usbsnowcrash.github.io/tree/blog">blog</a> and it contains my jekyll installation that is used to generate the site.  On my machine I have the two branches cloned and in separate directories.  I then wrote this handy publish script which, when run from the blog branch, generates the site and pushes the contents up to github.  This allows me to run any custom plugins I want from my machine since I am doing the content generation.</p>
+
+<div class="highlight"><pre><code class="bash"><span class="c">#publish.sh</span>
+rm -rf ../usbsnowcrash.github.io/*
+jekyll build --destination ../usbsnowcrash.github.io/
+<span class="nb">cd</span> ../usbsnowcrash.github.io/
+git add -u .
+git add .
+git commit -m <span class="s2">&quot;Commit into master triggered from publish script `date`&quot;</span>
+git push origin master
+<span class="nb">cd</span> ../blog
+git add .
+git commit -m <span class="s2">&quot;Commit into blog triggered from publish script `date`&quot;</span>
+git push origin blog</code></pre></div>
+
+<p>So when I want to create a new post I just make the changes on the blog branch and check them in with a helpful comment like so:</p>
+
+<div class="highlight"><pre><code class="bash">vim /_posts/2014-01-01-some-new-post.md
+git add .
+git commit <span class="s2">&quot;OMG new post&quot;</span>
+git push origin blog</code></pre></div>
+
+<p>And then when I am ready to publish these changes I run the publish script like so:</p>
+
+<div class="highlight"><pre><code class="bash">./publish.sh</code></pre></div>
+
+<p>If you want to see how anything else works feel free to head over to the <a href="https://github.com/usbsnowcrash/usbsnowcrash.github.io">github repo</a> and check it out.</p>
+
+	
+ 	<ul class="inline-list right">
+ 		<li>Filed under:</li>
+      	
+      	  
+     
+    	<li><a href="/tags/#jekyll-ref">jekyll</a></li>
+     
+    	<li><a href="/tags/#bash-ref">bash</a></li>
+     
+    	<li><a href="/tags/#code-ref">code</a></li>
+    
+  
+
+
+
+    </ul>
+  	 
+</article>
+      </div>
+          <aside class="small-12 large-3 columns">
+      <div class="row">
+        <div class="small-12 columns">
+          <h5>Posts by Tag</h5>
+
+          <ul class="inline-list">
+              
+            
+
+  
+     
+    	<li><a href="/tags/#programming-ref">programming <span>(2)</span></a></li>
+     
+    	<li><a href="/tags/#humor-ref">humor <span>(1)</span></a></li>
+     
+    	<li><a href="/tags/#c#-ref">c# <span>(2)</span></a></li>
+     
+    	<li><a href="/tags/#code-ref">code <span>(4)</span></a></li>
+     
+    	<li><a href="/tags/#ruby-ref">ruby <span>(2)</span></a></li>
+     
+    	<li><a href="/tags/#jekyll-ref">jekyll <span>(2)</span></a></li>
+     
+    	<li><a href="/tags/#bash-ref">bash <span>(1)</span></a></li>
+    
+  
+
+
+
+            <li><a href="/blog/">All Posts →</a></li>
+          </ul>
+        </div>
+        <div class="small-12 medium-6 large-12 columns">
+          <div class="panel text-center">
+            <a href="/about/"><img src="/assets/images/selfie.png" alt="Selfie" /></a>
+            <h5 class="text-left">Hi I'm Jeff,</h5>
+              <p class="text-left">I am a software architect with a passion for music, coding, fitness and art.  This is my portfolio / blog / space on the internet.</p>
+              <hr />
+              <a href="/about/">See More →</a>
+          </div>
+        </div>
+        <div class="small-12 medium-6 large-12 columns">
+          <div class="panel">
+            <h5>Digital Footprints</h5>
+            <hr />
+            <ul class="small-block-grid-6 medium-block-grid-3 large-block-grid-3">
+              <li><a href="http://8tracks.com/usbsnowcrash"><img src="/assets/images/social/8tracks.png"></a></li>
+              <li><a href="http://instagram.com/usbsnowcrash"><img src="/assets/images/social/instagram.png"></a></li>
+              <li><a href="http://www.last.fm/user/usbsnowcrash"><img src="/assets/images/social/lastfm.png"></a></li>
+              <li><a href="http://lnkd.in/NWMsmR"><img src="/assets/images/social/linkedin.png"></a></li>
+              <li><a href="http://www.pinterest.com/jefferyyeary/"><img src="/assets/images/social/pinterest.png"></a></li>
+              <li><a href="/feed.xml"><img src="/assets/images/social/rss.png"></a></li>
+              <li><a href="https://twitter.com/usbsnowcrash"><img src="/assets/images/social/twitter.png"></a></li>
+              <li><a href="http://www.youtube.com/user/usbsnowcrash"><img src="/assets/images/social/youtube.png"></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </aside>
+    </div>
+      <footer class="row">
+    <div class="small-12 columns">
+      <hr/>
+      <div class="row">
+        <div class="small-12 medium-5 columns">
+          <p class="text-center">© Copyright <a href="mailto:jeffery.yeary@gmail.com">Jeffery Yeary</a></p>
+        </div>
+        <div class="small-12 medium-7 columns">
+          <p class="text-center">Crafted lovingly with help from <a href="http://jekyllrb.com/">jekyll</a> and <a href="http://foundation.zurb.com/">foundation</a>.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="/assets/js/foundation.min.js"></script>
+  <script>
+    $(document).foundation();
+  </script>
+
+    </body>
+</html>

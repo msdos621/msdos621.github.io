@@ -1,3 +1,4 @@
+#publish.sh
 rm -rf ../usbsnowcrash.github.io/*
 jekyll build --destination ../usbsnowcrash.github.io/
 cd ../usbsnowcrash.github.io/
