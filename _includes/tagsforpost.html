@@ -1,0 +1,11 @@
+  {% if tags_list.first[0] == null %}
+    {% for tag in tags_list %} 
+    	<a class="button tiny" href="{{ BASE_PATH }}/tags/#{{ tag }}-ref">{{ tag }}</a>
+    {% endfor %}
+  {% else %}
+    {% for tag in tags_list %} 
+    	<a class="button-tiny" href="{{ BASE_PATH }}/tags/#{{ tag[0] }}-ref">{{ tag[0] }}</a>
+    {% endfor %}
+  {% endif %}
+
+{% assign tags_list = nil %}
