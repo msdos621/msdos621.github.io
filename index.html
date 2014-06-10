@@ -14,12 +14,11 @@ layout: default
 
         <p>
 
-            <strong>{{ post.title }}:</strong>
+            <strong><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>:</strong>
+            <br>
             {{ post.excerpt | strip_html }}
+            <a href="{{ post.url | prepend: site.baseurl }}">Read full post &raquo;</a>
         </p>
-        <ul class="inline-list">
-            <li><a href="{{ post.url | prepend: site.baseurl }}">Read full post &raquo;</a></li>
-        </ul>
     </div>
 </div>
 {% endfor %}
