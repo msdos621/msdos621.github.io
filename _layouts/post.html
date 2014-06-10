@@ -17,15 +17,15 @@ layout: default
 	{{ content }}
     <ul class="inline-list left">
         {% if page.previous %}
-        <li><a href="{{ page.previous.url }}" title="{{ page.previous.title }}">&laquo; Previous Post</a></li>
+        <li><a href="{{ page.previous.url }}" title="{{ page.previous.title }}">&laquo; Previous</a></li>
         {% else %}
-        <li><a>&larr; Previous Post</a></li>
+        <li><a>&larr; Previous</a></li>
         {% endif %}
-        <li><a href="/blog/">All Posts</a></li>
+        <li><a href="/blog/">All</a></li>
         {% if page.next %}
-        <li><a href="{{ page.next.url }}" title="{{ page.next.title }}">Next Post &raquo;</a></li>
+        <li><a href="{{ page.next.url }}" title="{{ page.next.title }}">Next &raquo;</a></li>
         {% else %}
-        <li><a>Next Post &rarr;</a>
+        <li><a>Next &rarr;</a>
         {% endif %}
     </ul>
 </article>
