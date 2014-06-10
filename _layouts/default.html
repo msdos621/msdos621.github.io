@@ -3,13 +3,23 @@
   {% include head.html %}
     <body>
 
-    {% include header.html %}
-    <div class="row">
-      <div class="small-12 medium-9 columns" role="content">
-        {{ content }}
+    <div class="off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+        {% include header.html %}
+        <section class="main-section">
+          <div class="row">
+            <div class="small-12 medium-9 columns" role="content">
+              {{ content }}
+            </div>
+            <div class="small-12 large-3"></div>
+            <br />
+            {% include sidenav.html %}
+          </div>
+        </section>
+
+        <a class="exit-off-canvas"></a>
+        {% include footer.html %}
       </div>
-      {% include sidenav.html %}
     </div>
-    {% include footer.html %}
     </body>
 </html>

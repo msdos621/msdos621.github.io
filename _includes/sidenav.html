@@ -1,21 +1,14 @@
     <aside class="small-12 large-3 columns">
       <div class="row">
         <div class="small-12 columns">
-          <h5>Posts by Tag</h5>
-
-          <ul class="inline-list">
-            {% assign tags_list = site.tags %}  
-            {% include taghelper.html %}
-            <li><a href="/blog/">All Posts →</a></li>
-          </ul>
-        </div>
-        <div class="small-12 medium-6 large-12 columns">
-          <div class="panel text-center">
-            <a href="/about/"><img src="/assets/images/selfie.png" alt="Selfie" /></a>
-            <h5 class="text-left">Hi I'm Jeff,</h5>
-              <p class="text-left">I am a software architect with a passion for music, coding, fitness and art.  This is my portfolio / blog / space on the internet.</p>
-              <hr />
-              <a href="/about/">See More →</a>
+          <div class="panel">
+            <h5>Posts by Tag</h5>
+            <hr />
+            <ul class="inline-list">
+              {% assign tags_list = site.tags %}  
+              {% include taghelper.html %}
+              <li><a href="/blog/">All Posts →</a></li>
+            </ul>
           </div>
         </div>
         <div class="small-12 medium-6 large-12 columns">
@@ -32,6 +25,16 @@
               <li><a href="https://twitter.com/usbsnowcrash"><img src="/assets/images/social/twitter.png"></a></li>
               <li><a href="http://www.youtube.com/user/usbsnowcrash"><img src="/assets/images/social/youtube.png"></a></li>
             </ul>
+          </div>
+        </div>
+
+        <div class="small-12 medium-6 large-12 columns">
+          <div class="panel text-center">
+            <a href="/about/"><img src="/assets/images/selfie.png" alt="Selfie" /></a>
+            <h5 class="text-left">Hi I'm Jeff,</h5>
+              <p class="text-left">I am a software architect with a passion for music, coding, fitness and art.  This is my portfolio / blog / space on the internet.</p>
+              <hr />
+              <a href="/about/">See More →</a>
           </div>
         </div>
       </div>
