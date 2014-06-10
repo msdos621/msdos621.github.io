@@ -12,47 +12,52 @@
 
     <body>
 
-    <nav class="top-bar" data-topbar>
-  <ul class="title-area">
-    <li class="name">
-      <a href="/"><img src="/assets/images/debug_ninja.png"></a>
-    </li>
-    <li class="toggle-topbar menu"><a href="#">Menu</a></li>
-  </ul>
+    <div class="off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+        
+    <nav class="tab-bar">
 
-  <section class="top-bar-section">
-    <!-- Right Nav Section -->
-    <ul class="right">
-      <li class="has-dropdown">
-        <a href="#">Menu</a>
-        <ul class="dropdown">
-          <li><a href="/">Home</a></li>
-          <li><a href="/about/">About Me</a></li>
-          <li><a href="/blog/">All Posts</a></li>
-          <li><a href="/tools/">Online Tools</a></li>
-          <li><a href="/tags/">Tags</a></li>
-        </ul>
-      </li>
-    </ul>
-  </section>
-</nav>
+      <section class="middle tab-bar-section">
+        <a href="/"><img src="/assets/images/debug_ninja.png" alt="Debug Ninja"></a>
+      </section>
 
-    <div class="row">
-      <div class="large-12 columns" role="content">
-        <div class="large-6 small-8 columns">
-	<img src="/assets/images/aerial_gym.png" alt="Picture of me practicing Aerial Silks" />
-</div>
-<div class="large-6 small-4 columns">
-    <p>I am a software architect that specializes in large distributed web apps in ruby and .net.</p>  
-    <p>I have a passion for music, coding, staying active and art. </p> 
-	<p>This is my portfolio / blog / space on the internet.</p>
-</div>
+      <section class="right-small">
+        <a class="right-off-canvas-toggle menu-icon" href="#"><span></span></a>
+      </section>
+    </nav>
+
+    <aside class="right-off-canvas-menu">
+      <ul class="off-canvas-list">
+        <li><label>Navigation</label></li>
+        <li><a href="/about/">About Me</a></li>
+        <li><a href="/blog/">Blog Post Archive</a></li>
+        <li><a href="/tags/">Posts by Tag</a></li>
+        <li><a href="/tools/">Web Dev Tools</a></li>
+      </ul>
+    </aside>
+
+        <section class="main-section">
+          <div class="row">
+            <div class="large-12" role="content">
+              	<div class="text-center">
+		<img src="/assets/images/aerial_gym.png" alt="Picture of me practicing Aerial Silks" />
+	</div>
+
+	<p>This is my portfolio / blog / space on the internet.  I am a software architect that specializes in large distributed web apps in ruby and .net.  I work for careerbuilder.com and I am currentlly working on moving our main site into the public cloud.  I have a passion for music, coding, staying active and art.</p> 
+
+    <p> For more than a year, I've been focused on getting healthier and developing good habits, so I've been taking a lot of fitness classes, including karate, kettlebell, TRX. I never turn down an opportunity to do some other exercise, for example Aerial Dance, Soccer, etc.  In the last year alone I have lost 120lbs so I am pretty serious about it.</p>
+
+    <p> I listen to a lot of music like Less Than Jake, Smashing Pumpkins, Mindless Self Indulgence, Local H, Gorillaz, Yeah Yeah Yeahs, Grandaddy, Metric, Foster the People, Cage the Elephant, Grouplove, Manchester Orchestra, Tegan and Sara, Offspring, Modest Mouse, Lumineers, Fun, Kevin Devine, The Wombats, Social Distortion and many many more. I am kinda obsessive about it :)</p>
+
+    <p>Standard disclaimer: The views expressed on this site are solely my own!</p>
 
 
+            </div>
+          </div>
+        </section>
 
-      </div>
-    </div>
-      <footer class="row">
+        <a class="exit-off-canvas"></a>
+          <footer class="row">
     <div class="small-12 columns">
       <hr/>
       <div class="row">
@@ -71,5 +76,7 @@
     $(document).foundation();
   </script>
 
+      </div>
+    </div>
     </body>
 </html>

@@ -12,34 +12,34 @@
 
     <body>
 
-    <nav class="top-bar" data-topbar>
-  <ul class="title-area">
-    <li class="name">
-      <a href="/"><img src="/assets/images/debug_ninja.png"></a>
-    </li>
-    <li class="toggle-topbar menu"><a href="#">Menu</a></li>
-  </ul>
+    <div class="off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+        
+    <nav class="tab-bar">
 
-  <section class="top-bar-section">
-    <!-- Right Nav Section -->
-    <ul class="right">
-      <li class="has-dropdown">
-        <a href="#">Menu</a>
-        <ul class="dropdown">
-          <li><a href="/">Home</a></li>
-          <li><a href="/about/">About Me</a></li>
-          <li><a href="/blog/">All Posts</a></li>
-          <li><a href="/tools/">Online Tools</a></li>
-          <li><a href="/tags/">Tags</a></li>
-        </ul>
-      </li>
-    </ul>
-  </section>
-</nav>
+      <section class="middle tab-bar-section">
+        <a href="/"><img src="/assets/images/debug_ninja.png" alt="Debug Ninja"></a>
+      </section>
 
-    <div class="row">
-      <div class="small-12 medium-9 columns" role="content">
-        <article>
+      <section class="right-small">
+        <a class="right-off-canvas-toggle menu-icon" href="#"><span></span></a>
+      </section>
+    </nav>
+
+    <aside class="right-off-canvas-menu">
+      <ul class="off-canvas-list">
+        <li><label>Navigation</label></li>
+        <li><a href="/about/">About Me</a></li>
+        <li><a href="/blog/">Blog Post Archive</a></li>
+        <li><a href="/tags/">Posts by Tag</a></li>
+        <li><a href="/tools/">Web Dev Tools</a></li>
+      </ul>
+    </aside>
+
+        <section class="main-section">
+          <div class="row">
+            <div class="small-12 medium-9 columns" role="content">
+              <article>
  	<h3>Blog Post Archive</h3>
  	
 	
@@ -143,15 +143,18 @@
     
 
 </article>
-      </div>
-          <aside class="small-12 large-3 columns">
+            </div>
+            <div class="small-12 large-3"></div>
+            <br />
+                <aside class="small-12 large-3 columns">
       <div class="row">
         <div class="small-12 columns">
-          <h5>Posts by Tag</h5>
-
-          <ul class="inline-list">
+          <div class="panel">
+            <h5>Posts by Tag</h5>
+            <hr />
+            <ul class="inline-list">
+                
               
-            
 
   
      
@@ -173,16 +176,8 @@
 
 
 
-            <li><a href="/blog/">All Posts →</a></li>
-          </ul>
-        </div>
-        <div class="small-12 medium-6 large-12 columns">
-          <div class="panel text-center">
-            <a href="/about/"><img src="/assets/images/selfie.png" alt="Selfie" /></a>
-            <h5 class="text-left">Hi I'm Jeff,</h5>
-              <p class="text-left">I am a software architect with a passion for music, coding, fitness and art.  This is my portfolio / blog / space on the internet.</p>
-              <hr />
-              <a href="/about/">See More →</a>
+              <li><a href="/blog/">All Posts →</a></li>
+            </ul>
           </div>
         </div>
         <div class="small-12 medium-6 large-12 columns">
@@ -201,10 +196,23 @@
             </ul>
           </div>
         </div>
+
+        <div class="small-12 medium-6 large-12 columns">
+          <div class="panel text-center">
+            <a href="/about/"><img src="/assets/images/selfie.png" alt="Selfie" /></a>
+            <h5 class="text-left">Hi I'm Jeff,</h5>
+              <p class="text-left">I am a software architect with a passion for music, coding, fitness and art.  This is my portfolio / blog / space on the internet.</p>
+              <hr />
+              <a href="/about/">See More →</a>
+          </div>
+        </div>
       </div>
     </aside>
-    </div>
-      <footer class="row">
+          </div>
+        </section>
+
+        <a class="exit-off-canvas"></a>
+          <footer class="row">
     <div class="small-12 columns">
       <hr/>
       <div class="row">
@@ -223,5 +231,7 @@
     $(document).foundation();
   </script>
 
+      </div>
+    </div>
     </body>
 </html>
