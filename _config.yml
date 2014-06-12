@@ -1,10 +1,10 @@
 # Site settings
-title: Debug Ninja
-email: jeffery.yeary@gmail.com
+title: 'Debug Ninja'
+email: 'jeffery.yeary@gmail.com'
 authorname: Jeffery Yeary
-description: "This is the portfolio / blog / space on the internet of Jeffery Yeary, a software architect with a passion for music, coding, fitness and art."
-baseurl: ""
-url: "http://debug.ninja"
+description: 'This is the portfolio / blog / space on the internet of Jeffery Yeary, a software architect with a passion for music, coding, fitness and art.'
+baseurl: ''
+url: 'http://debug.ninja'
 
 gems:
   - jekyll-sitemap
@@ -13,3 +13,15 @@ gems:
 markdown: kramdown
 permalink: pretty
 highlighter: pygments
+
+#Superfeed settings
+last_fm_username: 'usbsnowcrash'
+last_fm_limit: '4'
+last_fm_icon: ''
+
+instagram_id: '54558149'
+instagram_limit: '4'
+instagram_icon: ''
+
+blog_feed_limit: '2'
+blog_feed_icon: ''

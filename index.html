@@ -1,23 +1,23 @@
 ---
 layout: default
 ---
-{% for post in site.posts limit:5 %}
+{% for item in site.feed_items %}
 <hr/>
 <div class="row">
     <div class="small-2 columns">
         <p>
-            <a href="/blog"><img src="/assets/images/social/rss.png"></a>
+            <a href="/blog"><img src="{{ item.icon }}"></a>
         </p>
-        {{ post.date | date_to_string }}
+        {{ item.published | date_to_string }}
      </div>
     <div class="small-10 columns">
 
         <p>
 
-            <strong><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>:</strong>
+            <strong><a href="{{ item.title_url }}">{{ item.title }}</a>:</strong>
             <br>
-            {{ post.excerpt | strip_html }}
-            <a href="{{ post.url | prepend: site.baseurl }}">Read full post &raquo;</a>
+            {{ item.snippet | strip_html }}
+            <a href="{{ item.title_url }}">Read full post &raquo;</a>
         </p>
     </div>
 </div>

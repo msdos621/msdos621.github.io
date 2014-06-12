@@ -3,7 +3,17 @@ require 'ostruct'
 require 'net/http'
 require 'json'
 require 'pry'
+require 'dotenv'
+
 module Jekyll
+
+  class Site
+    attr_accessor :feed
+
+    def feed_items
+      @feed
+    end
+  end
 
   class FeedPage < Page
     def initialize(site, base, dir, feed_items)
@@ -19,21 +29,27 @@ module Jekyll
     end
   end
 
-  class FeedPageGenerator < Generator
+  class FeedGenerator < Generator
     def generate(site)
-      l = LastFMFeed.new(:username => 'usbsnowcrash', :apikey => '').feed
-      i = InstagramFeed.new(:username => '54558149', :apikey => '').feed
-      #all_items = i.zip(l).flatten.compact
+      Dotenv.load
 
-      all_items = i.concat(l).sort!{ |a,b| a.published <=> b.published }.reverse
-      dir = site.config['feed_dir'] || 'feed'
-      site.pages << FeedPage.new(site, site.source, dir,all_items)
+      b = BlogPostsFeed.new(site.baseurl, site.posts, site.config['blog_feed_limit']).feed
+      l = LastFMFeed.new(:username => site.config['last_fm_username'], :apikey => ENV['LASTFM_KEY'], :limit => site.config['last_fm_limit']).feed
+      i = InstagramFeed.new(:username => site.config['instagram_id'], :apikey => ENV['INSTAGRAM_KEY'], :limit => site.config['instagram_limit']).feed
+      #all_items = i.zip(l).flatten.compact
+      all_items = b.reverse.concat(i.concat(l).sort!{ |a,b| a.published <=> b.published }.reverse)
+      #dir = site.config['feed_dir'] || 'feed'
+      site.feed = all_items
+      binding.pry
+      #site.pages << FeedPage.new(site, site.source, dir,all_items)
     end
   end
 
+
+
   class FeedItem
     extend Forwardable
-    attr_accessor :source_name, :published, :title, :snippet, :image_preview_uri, :weight
+    attr_accessor :icon, :source_name, :published, :title, :title_link, :snippet, :image_preview_uri
 
     def initialize(options = {})
       @options = OpenStruct.new(options)
@@ -44,19 +60,20 @@ module Jekyll
 
     def to_liquid
       {
-        'source_name'    =>    source_name,
-        'published' =>          published,
-        'title'       =>     title,
-        'snippet'     =>       snippet,
-        'image_preview_uri' => image_preview_uri,
-        'weight'       =>     weight
+        'icon'              =>  icon,
+        'source_name'       =>  source_name,
+        'published'         =>  published,
+        'title'             =>  title,
+        'title_link'        =>  title_link,
+        'snippet'           =>  snippet,
+        'image_preview_uri' =>  image_preview_uri
       }
     end
   end
 
   class LastFMFeed
     extend Forwardable
-    attr_accessor :username, :apikey
+    attr_accessor :username, :apikey, :limit
 
     def initialize(options = {})
       @options = OpenStruct.new(options)
@@ -66,7 +83,8 @@ module Jekyll
     end
 
     def feed
-      url = "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=#{username}&api_key=#{apikey}&format=json&limit=200"
+      puts 'fetching Last fm feed'
+      url = "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=#{username}&api_key=#{apikey}&format=json&limit=#{limit}"
       resp = Net::HTTP.get_response(URI.parse(url)) # get_response takes an URI object
       data = JSON.parse(resp.body)
       tracks = data['recenttracks']['track']
@@ -74,7 +92,8 @@ module Jekyll
       tracks.each do |track|
         publish_date = DateTime.now.to_time
         publish_date = DateTime.parse(track['date']['#text']).to_time if track['date']
-        item = FeedItem.new(:source_name        => 'Last FM',
+        item = FeedItem.new(:icon               => '/assets/images/social/lastfm.png',
+                            :source_name        => 'Last FM',
                             :title              => "Played: #{track['artist']['#text']} - #{track['name']}",
                             :snippet            =>  "from the album #{track['album']['#text']}",
                             :image_preview_uri  => track['image'][1]['#text'],
@@ -88,7 +107,7 @@ module Jekyll
 
   class InstagramFeed
     extend Forwardable
-    attr_accessor :username, :apikey
+    attr_accessor :username, :apikey, :limit
 
     def initialize(options = {})
       @options = OpenStruct.new(options)
@@ -98,7 +117,8 @@ module Jekyll
     end
 
     def feed
-      url = "https://api.instagram.com/v1/users/#{username}/media/recent/?access_token=#{apikey}&count=200"
+      puts 'fetching instagram feed'
+      url = "https://api.instagram.com/v1/users/#{username}/media/recent/?access_token=#{apikey}&count=#{limit}"
       uri = URI.parse(url)
       response = nil
       Net::HTTP.start(uri.host, uri.port,
@@ -113,7 +133,8 @@ module Jekyll
       images.each do |image|
         caption = ''
         caption = image['caption']['text'] if image['caption']
-        item = FeedItem.new(:source_name          => 'Instagram',
+        item = FeedItem.new(:icon                 => '/assets/images/social/instagram.png',
+                            :source_name          => 'Instagram',
                             :title                => "Took a photo",
                             :snippet              => caption,
                             :image_preview_uri    => image['images']['thumbnail']['url'],
@@ -122,6 +143,34 @@ module Jekyll
         parsed_images.push item
       end
       parsed_images
+    end
+  end
+
+  class BlogPostsFeed
+    attr_accessor :base_url, :posts, :limit
+
+    def initialize(base_url, posts, limit)
+      @posts = posts
+      @base_url = base_url
+      @limit = limit
+    end
+
+    def feed
+      puts 'fetching blog posts feed'
+      feed_items = []
+      recent_posts = @posts.last limit.to_i
+      recent_posts.each do |post|
+        item = FeedItem.new(:icon                 => '/assets/images/social/rss.png',
+                            :source_name          => 'BlogPosts',
+                            :title                => post.title,
+                            :title_link           => post.url.prepend(base_url),
+                            :snippet              => post.excerpt,
+                            :image_preview_uri    => '',
+                            :published            => post.date)
+
+        feed_items.push item
+      end
+      feed_items
     end
   end
 
