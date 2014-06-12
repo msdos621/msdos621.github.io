@@ -20,3 +20,15 @@
   <script>
     $(document).foundation();
   </script>
+{% if page.path contains '_posts' %}
+<script type="text/javascript">
+var a2a_config = a2a_config || {};
+a2a_config.linkname = "{{ page.title }}";
+a2a_config.linkurl = "{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}";
+a2a_config.color_main = "D7E5ED";
+a2a_config.color_border = "AECADB";
+a2a_config.color_link_text = "333333";
+a2a_config.color_link_text_hover = "333333";
+</script>
+<script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+{% endif %}
