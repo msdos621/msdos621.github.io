@@ -1,25 +1,22 @@
   <footer class="row">
-    <div class="large-12 columns">
+    <div class="small-12 columns">
       <hr/>
       <div class="row">
-        <div class="large-3 columns">
+        <div class="small-12 medium-5 columns">
           <p class="text-center">© Copyright <a href="mailto:{{ site.email }}">{{ site.authorname }}</a></p>
         </div>
-        <div class="large-2 columns">
-          <p class="text-center">Subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-        </div>
-        <div class="large-7 columns">
+        <div class="small-12 medium-7 columns">
           <p class="text-center">Crafted lovingly with help from <a href="http://jekyllrb.com/">jekyll</a> and <a href="http://foundation.zurb.com/">foundation</a>.</p>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="large-12 columns right">
-
-      </div>
-    </div>
   </footer>
-  <script src="/assets/js/foundation.min.js"></script>
+{% javascript_asset_tag global %}
+- /_assets/js/vendor/modernizr.js
+- /_assets/js/vendor/jquery.js
+- /_assets/js/foundation.min.js
+- /_assets/js/url_encode_decode.js
+{% endjavascript_asset_tag %}  
   <script>
     $(document).foundation();
   </script>

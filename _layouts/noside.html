@@ -3,12 +3,20 @@
   {% include head.html %}
     <body>
 
-    {% include header.html %}
-    <div class="row">
-      <div class="large-12 columns" role="content">
-        {{ content }}
+    <div class="off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+        {% include header.html %}
+        <section class="main-section">
+          <div class="row">
+            <div class="large-12" role="content">
+              {{ content }}
+            </div>
+          </div>
+        </section>
+
+        <a class="exit-off-canvas"></a>
+        {% include footer.html %}
       </div>
     </div>
-    {% include footer.html %}
     </body>
 </html>

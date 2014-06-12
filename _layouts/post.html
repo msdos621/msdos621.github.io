@@ -4,13 +4,28 @@ layout: default
 <article>
  	<h3><a href="#">{{ page.title }}</a></h3>
  	<h6>Written by {{ page.author }} on {{ page.date | date: "%b %-d, %Y" }}</h6>
+    <h6>
+        {% unless page.tags == empty %}
+        <ul class="inline-list right">
+            <li>Filed under:</li>
+            {% assign tags_list = page.tags %}
+            {% include tagsforpost.html %}
+        </ul>
+        {% endunless %}
+    </h6>
     <hr />
 	{{ content }}
-</article>
-
-	{% unless page.tags == empty %}
-    <ul class="inline">
-      {% assign tags_list = page.tags %}
-      {% include taghelper.html %}
+    <ul class="inline-list left">
+        {% if page.previous %}
+        <li><a href="{{ page.previous.url }}" title="{{ page.previous.title }}">&laquo; Previous</a></li>
+        {% else %}
+        <li><a>&larr; Previous</a></li>
+        {% endif %}
+        <li><a href="/blog/">All</a></li>
+        {% if page.next %}
+        <li><a href="{{ page.next.url }}" title="{{ page.next.title }}">Next &raquo;</a></li>
+        {% else %}
+        <li><a>Next &rarr;</a>
+        {% endif %}
     </ul>
-  	{% endunless %}  
+</article>

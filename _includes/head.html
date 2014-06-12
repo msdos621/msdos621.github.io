@@ -1,10 +1,12 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
-	<link rel="stylesheet" href="/assets/css/psychic_debugging.css">
+	<title>{% if page.title %}{{ page.title }} | Debug Ninja{% else %}{{ site.title }}{% endif %}</title>
+{% css_asset_tag global %}
+- /_assets/css/lato_font.css
+- /_assets/css/foundation_custom.css
+- /_assets/css/syntax.css
+{% endcss_asset_tag %}
 	<link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
-	<meta name="description" content="{{ site.description }}">
-	<script src="/assets/js/vendor/modernizr.js"></script>
-	<script src="/assets/js/vendor/jquery.js"></script>
+	<meta name="description" content="{% if page.title %}{{ page.title }}{% else %}{{ site.description }}{% endif %}">
 </head>

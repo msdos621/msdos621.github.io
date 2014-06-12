@@ -23,7 +23,11 @@ Input any string of text and press encode or decode in order to url encode / dec
 		</div>
 	</div>
 </form>
-<script>
+<p>
+Here is the code used to do this
+</p>
+{% highlight javascript %}
+{% raw %}
 $(document).ready(function () {
  	$('#encode').click(function() {
   		$('#decode_box').val(encodeURIComponent($('#decode_box').val()));
@@ -33,4 +37,5 @@ $(document).ready(function () {
   		$('#decode_box').val(decodeURIComponent($('#decode_box').val()));
 	});
  });
-</script>
+{% endraw %}
+{% endhighlight %}
