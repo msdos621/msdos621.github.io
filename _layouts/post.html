@@ -15,17 +15,31 @@ layout: default
     </h6>
     <hr />
 	{{ content }}
-    <ul class="inline-list left">
-        {% if page.previous %}
-        <li><a href="{{ page.previous.url }}" title="{{ page.previous.title }}">&laquo; Previous</a></li>
-        {% else %}
-        <li><a>&larr; Previous</a></li>
-        {% endif %}
-        <li><a href="/blog/">All</a></li>
-        {% if page.next %}
-        <li><a href="{{ page.next.url }}" title="{{ page.next.title }}">Next &raquo;</a></li>
-        {% else %}
-        <li><a>Next &rarr;</a>
-        {% endif %}
-    </ul>
+    <p>
+        <h6>Share</h6>
+        <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+        <a class="a2a_dd" href="http://www.addtoany.com/share_save?linkurl=http%3A%2F%2Fdebug.ninja&amp;linkname=Debug%20Ninja"></a>
+            <a class="a2a_button_stumbleupon"></a>
+            <a class="a2a_button_facebook"></a>
+            <a class="a2a_button_pinterest"></a>
+            <a class="a2a_button_google_plus"></a>
+            <a class="a2a_button_twitter"></a>
+            <a class="a2a_button_tumblr"></a>
+        </div>
+    </p>
+    <p>    
+        <ul class="inline-list text-center">
+            {% if page.previous %}
+            <li><a href="{{ page.previous.url }}" title="{{ page.previous.title }}">&laquo; Previous</a></li>
+            {% else %}
+            <li><a>&larr; Previous</a></li>
+            {% endif %}
+            <li><a href="/blog/">All</a></li>
+            {% if page.next %}
+            <li><a href="{{ page.next.url }}" title="{{ page.next.title }}">Next &raquo;</a></li>
+            {% else %}
+            <li><a>Next &rarr;</a>
+            {% endif %}
+        </ul>
+    </p>
 </article>
