@@ -6,42 +6,19 @@ require 'pry'
 require 'dotenv'
 
 module Jekyll
-
-  class Site
-    attr_accessor :feed
-
-    def feed_items
-      @feed
-    end
-  end
-
-  class FeedPage < Page
-    def initialize(site, base, dir, feed_items)
-      @site = site
-      @base = base
-      @dir = dir
-      @name = 'latest.html'
-
-      self.process(@name)
-      self.read_yaml(File.join(base, '_layouts'), 'feed.html')
-      self.data['feed_items'] = feed_items
-      self.data['title'] = 'Latest Feed Items'
-    end
-  end
-
   class FeedGenerator < Generator
     def generate(site)
       Dotenv.load
 
-      b = BlogPostsFeed.new(site.baseurl, site.posts, site.config['blog_feed_limit']).feed
+      #b = BlogPostsFeed.new(site.baseurl, site.posts, site.config['blog_feed_limit']).feed
       l = LastFMFeed.new(:username => site.config['last_fm_username'], :apikey => ENV['LASTFM_KEY'], :limit => site.config['last_fm_limit']).feed
-      i = InstagramFeed.new(:username => site.config['instagram_id'], :apikey => ENV['INSTAGRAM_KEY'], :limit => site.config['instagram_limit']).feed
-      #all_items = i.zip(l).flatten.compact
-      all_items = b.reverse.concat(i.concat(l).sort!{ |a,b| a.published <=> b.published }.reverse)
-      #dir = site.config['feed_dir'] || 'feed'
-      site.feed = all_items
-      binding.pry
-      #site.pages << FeedPage.new(site, site.source, dir,all_items)
+      i = InstagramFeed.new(:username => site.config['instagram_username'], :userid => site.config['instagram_id'], :apikey => ENV['INSTAGRAM_KEY'], :limit => site.config['instagram_limit']).feed
+      all_items = i.zip(l).flatten.compact.sort!{ |a,b| a.published <=> b.published }.reverse
+      #all_items = b.reverse.concat(i.concat(l).sort!{ |a,b| a.published <=> b.published }.reverse)
+
+      site.pages.each do |page|
+        page.data['feed_items'] = all_items
+      end
     end
   end
 
@@ -49,7 +26,7 @@ module Jekyll
 
   class FeedItem
     extend Forwardable
-    attr_accessor :icon, :source_name, :published, :title, :title_link, :snippet, :image_preview_uri
+    attr_accessor :icon, :source_name, :published, :title, :title_link, :snippet, :image_preview_uri, :profile_link
 
     def initialize(options = {})
       @options = OpenStruct.new(options)
@@ -66,7 +43,8 @@ module Jekyll
         'title'             =>  title,
         'title_link'        =>  title_link,
         'snippet'           =>  snippet,
-        'image_preview_uri' =>  image_preview_uri
+        'image_preview_uri' =>  image_preview_uri,
+        'profile_link'      =>  profile_link
       }
     end
   end
@@ -91,14 +69,17 @@ module Jekyll
       parsed_tracks = []
       tracks.each do |track|
         publish_date = DateTime.now.to_time
+        snippet = ''
+        snippet = "from the album #{track['album']['#text']}" if track['album']['#text']
         publish_date = DateTime.parse(track['date']['#text']).to_time if track['date']
         item = FeedItem.new(:icon               => '/assets/images/social/lastfm.png',
                             :source_name        => 'Last FM',
                             :title              => "Played: #{track['artist']['#text']} - #{track['name']}",
-                            :snippet            =>  "from the album #{track['album']['#text']}",
-                            :image_preview_uri  => track['image'][1]['#text'],
-                            :published          => publish_date)
-
+                            :title_link         => track['url'],
+                            :snippet            =>  snippet,
+                            :image_preview_uri  => track['image'][2]['#text'],
+                            :published          => publish_date,
+                            :profile_link       => "http://www.last.fm/user/#{username}")
         parsed_tracks.push item
       end
       parsed_tracks
@@ -107,7 +88,7 @@ module Jekyll
 
   class InstagramFeed
     extend Forwardable
-    attr_accessor :username, :apikey, :limit
+    attr_accessor :username,:userid, :apikey, :limit
 
     def initialize(options = {})
       @options = OpenStruct.new(options)
@@ -118,7 +99,7 @@ module Jekyll
 
     def feed
       puts 'fetching instagram feed'
-      url = "https://api.instagram.com/v1/users/#{username}/media/recent/?access_token=#{apikey}&count=#{limit}"
+      url = "https://api.instagram.com/v1/users/#{userid}/media/recent/?access_token=#{apikey}&count=#{limit}"
       uri = URI.parse(url)
       response = nil
       Net::HTTP.start(uri.host, uri.port,
@@ -135,11 +116,12 @@ module Jekyll
         caption = image['caption']['text'] if image['caption']
         item = FeedItem.new(:icon                 => '/assets/images/social/instagram.png',
                             :source_name          => 'Instagram',
-                            :title                => "Took a photo",
+                            :title                => 'Took a photo',
+                            :title_link           => image['link'],
                             :snippet              => caption,
                             :image_preview_uri    => image['images']['thumbnail']['url'],
-                            :published            => Time.at(image['created_time'].to_i))
-
+                            :published            => Time.at(image['created_time'].to_i),
+                            :profile_link         => "http://instagram.com/#{username}")
         parsed_images.push item
       end
       parsed_images

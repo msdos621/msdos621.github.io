@@ -1,24 +1,48 @@
 ---
 layout: default
 ---
-{% for item in site.feed_items %}
+{% for post in site.posts limit:1 %}
 <hr/>
 <div class="row">
     <div class="small-2 columns">
         <p>
-            <a href="/blog"><img src="{{ item.icon }}"></a>
+            <a href="/blog"><img src="/assets/images/social/rss.png"></a>
+        </p>
+        {{ post.date | date_to_string }}
+    </div>
+    <div class="small-10 columns">
+        <p>
+            <a href="{{ post.url | prepend: site.baseurl }}">Posted: {{ post.title }}</a>
+            <br>
+            {{ post.excerpt | strip_html }}...
+        </p>
+    </div>
+</div>
+{% endfor %}
+
+{% for item in page.feed_items %}
+<hr/>
+<div class="row">
+    <div class="small-2 columns">
+        <p>
+            <a href="{{ item.profile_link }}"><img src="{{ item.icon }}"></a>
         </p>
         {{ item.published | date_to_string }}
      </div>
     <div class="small-10 columns">
-
-        <p>
-
-            <strong><a href="{{ item.title_url }}">{{ item.title }}</a>:</strong>
-            <br>
-            {{ item.snippet | strip_html }}
-            <a href="{{ item.title_url }}">Read full post &raquo;</a>
-        </p>
+        <div class="row">
+            <div class="small-12 columns">
+                <a href="{{ item.title_link }}">{{ item.title }}</a>
+            </div>
+            <div class="small-12 small-centered columns">
+                {% if item.image_preview_uri %}
+                <a href="{{ item.title_link }}"><img src="{{ item.image_preview_uri }}" /></a>
+                {% endif %}
+            </div>
+            <div class="small-12 small-centered columns">
+                {{ item.snippet}}
+            </div>
+        </div>
     </div>
 </div>
 {% endfor %}
