@@ -116,7 +116,7 @@ module Jekyll
         caption = image['caption']['text'] if image['caption']
         item = FeedItem.new(:icon                 => '/assets/images/social/instagram.png',
                             :source_name          => 'Instagram',
-                            :title                => 'Took a photo',
+                            :title                => 'Look a photo',
                             :title_link           => image['link'],
                             :snippet              => caption,
                             :image_preview_uri    => image['images']['thumbnail']['url'],
