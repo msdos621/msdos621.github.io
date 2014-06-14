@@ -28,21 +28,19 @@ layout: default
             <a href="{{ item.profile_link }}"><img src="{{ item.icon }}"></a>
         </p>
         {{ item.published | date_to_string }}
-     </div>
+    </div>
     <div class="small-10 columns">
-        <div class="row">
-            <div class="small-12 columns">
-                <a href="{{ item.title_link }}">{{ item.title }}</a>
-            </div>
-            <div class="small-12 small-centered columns">
-                {% if item.image_preview_uri %}
-                <a href="{{ item.title_link }}"><img src="{{ item.image_preview_uri }}" /></a>
-                {% endif %}
-            </div>
-            <div class="small-12 small-centered columns">
-                {{ item.snippet}}
-            </div>
-        </div>
+        <p>
+            <a href="{{ item.title_link }}">{{ item.title }}</a>
+            {% if item.image_preview_uri %}
+            <br>
+            <a href="{{ item.title_link }}"><img src="{{ item.image_preview_uri }}" /></a>
+            {% endif %}
+            {% if item.snippet %}
+            <br>
+            {{ item.snippet}}
+            {% endif %}
+        </p>
     </div>
 </div>
 {% endfor %}

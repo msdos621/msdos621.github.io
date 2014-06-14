@@ -70,13 +70,13 @@ module Jekyll
       tracks.each do |track|
         publish_date = DateTime.now.to_time
         snippet = ''
-        snippet = "from the album #{track['album']['#text']}" if track['album']['#text']
+        snippet = "from the album #{track['album']['#text']}" unless track['album']['#text'].empty?
         publish_date = DateTime.parse(track['date']['#text']).to_time if track['date']
         item = FeedItem.new(:icon               => '/assets/images/social/lastfm.png',
                             :source_name        => 'Last FM',
                             :title              => "Played: #{track['artist']['#text']} - #{track['name']}",
                             :title_link         => track['url'],
-                            :snippet            =>  snippet,
+                            :snippet            => snippet,
                             :image_preview_uri  => track['image'][2]['#text'],
                             :published          => publish_date,
                             :profile_link       => "http://www.last.fm/user/#{username}")
