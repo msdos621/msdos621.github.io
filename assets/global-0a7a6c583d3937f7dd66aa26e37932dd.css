@@ -1,25 +1,3 @@
-/***Lato Font from google fonts***/
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  -webkit-text-stroke: 0.5px;
-  font-weight: 300;
-  src: local('Lato Light'), local('Lato-Light'), url(/assets/fonts/kcf5uOXucLcbFOydGU24WALUuEpTyoUstqEm5AMlJo4.woff) format('woff');
-}
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  -webkit-text-stroke: 0.5px;
-  font-weight: 700;
-  src: local('Lato Bold'), local('Lato-Bold'), url(/assets/fonts/qdgUG4U09HnJwhYI-uK18wLUuEpTyoUstqEm5AMlJo4.woff) format('woff');
-}
-@font-face {
-  font-family: 'Lato';
-  font-style: italic;
-  -webkit-text-stroke: 0.5px;
-  font-weight: 300;
-  src: local('Lato Light Italic'), local('Lato-LightItalic'), url(/assets/fonts/2HG_tEPiQ4Z6795cGfdivLO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
-}
 /***Foundation 5***/
 meta.foundation-version {
     font-family: "/5.2.3/"}
@@ -5205,17 +5183,6 @@ body {
 aside h5  {
     
 	color: #93C459;
-    
-}
-
-*  {
-    
-    font-family:  'Lato',  sans-serif;
-    
-  }
-pre {
-    
-	overflow:  scroll;
     
 }
 /***Based on one of the themes from pygments for syntax highlighting***/
