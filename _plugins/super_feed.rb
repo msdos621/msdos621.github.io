@@ -10,14 +10,16 @@ module Jekyll
     def generate(site)
       Dotenv.load
 
-      #b = BlogPostsFeed.new(site.baseurl, site.posts, site.config['blog_feed_limit']).feed
+      filter = (Date.today - site.config['superfeed_days_back']).to_time
+      b = BlogPostsFeed.new(site.baseurl, site.posts, site.config['blog_feed_limit']).feed
       l = LastFMFeed.new(:username => site.config['last_fm_username'], :apikey => ENV['LASTFM_KEY'], :limit => site.config['last_fm_limit']).feed
       i = InstagramFeed.new(:username => site.config['instagram_username'], :userid => site.config['instagram_id'], :apikey => ENV['INSTAGRAM_KEY'], :limit => site.config['instagram_limit']).feed
-      all_items = i.zip(l).flatten.compact.sort!{ |a,b| a.published <=> b.published }.reverse
-      #all_items = b.reverse.concat(i.concat(l).sort!{ |a,b| a.published <=> b.published }.reverse)
+      g = GithubFeed.new(:username => site.config['github_username'], :limit => site.config['github_limit']).feed
 
+      all_items = b+ l + i + g
+      all_items = all_items.compact.sort!{ |a,b| a.published <=> b.published }.reverse
       site.pages.each do |page|
-        page.data['feed_items'] = all_items
+        page.data['feed_items'] = all_items.select{|item| item.published > filter }
       end
     end
   end
@@ -74,7 +76,7 @@ module Jekyll
         publish_date = DateTime.parse(track['date']['#text']).to_time if track['date']
         item = FeedItem.new(:icon               => '/assets/images/social/lastfm.png',
                             :source_name        => 'Last FM',
-                            :title              => "Played: #{track['artist']['#text']} - #{track['name']}",
+                            :title              => "Listened to #{track['artist']['#text']} - #{track['name']}",
                             :title_link         => track['url'],
                             :snippet            => snippet,
                             :image_preview_uri  => track['image'][2]['#text'],
@@ -83,6 +85,51 @@ module Jekyll
         parsed_tracks.push item
       end
       parsed_tracks
+    end
+  end
+
+  class GithubFeed
+    extend Forwardable
+    attr_accessor :username, :limit
+
+    def initialize(options = {})
+      @options = OpenStruct.new(options)
+      self.class.instance_eval do
+        def_delegators :@options, *options.keys
+      end
+    end
+
+    def feed
+      puts 'fetching github feed'
+      url = "https://github.com/#{username}.json"
+      uri = URI.parse(url)
+      response = nil
+      Net::HTTP.start(uri.host, uri.port,
+                      :use_ssl => uri.scheme == 'https') do |http|
+        request = Net::HTTP::Get.new url
+        response = http.request request
+      end
+      gits = JSON.parse(response.body)
+      parsed_git = []
+      gits.each do |git|
+        caption = ''
+        if git['payload'] && git['payload']['shas']
+          git['payload']['shas'].each do |sha|
+            caption += "#{sha[2]}<br>"
+          end
+        end
+        item = FeedItem.new(:icon                 => '/assets/images/social/github2.png',
+                            :source_name          => 'Github',
+                            :title                => "#{git['actor']} #{git['type']} to #{git['repository']['name']}",
+                            :title_link           => git['url'],
+                            :snippet              => caption,
+                            :image_preview_uri    => '',
+                            :published            => DateTime.parse(git['created_at']).to_time,
+                            :profile_link         => "https://github.com/#{username}")
+        #binding.pry unless item.snippet.include?('triggered from publish script')
+        parsed_git.push item unless item.snippet.include?('triggered from publish script')
+      end
+      parsed_git.last(limit)
     end
   end
 
@@ -116,7 +163,7 @@ module Jekyll
         caption = image['caption']['text'] if image['caption']
         item = FeedItem.new(:icon                 => '/assets/images/social/instagram.png',
                             :source_name          => 'Instagram',
-                            :title                => 'Look a photo',
+                            :title                => 'Took a photo',
                             :title_link           => image['link'],
                             :snippet              => caption,
                             :image_preview_uri    => image['images']['thumbnail']['url'],
@@ -140,7 +187,7 @@ module Jekyll
     def feed
       puts 'fetching blog posts feed'
       feed_items = []
-      recent_posts = @posts.last limit.to_i
+      recent_posts = @posts.last limit
       recent_posts.each do |post|
         item = FeedItem.new(:icon                 => '/assets/images/social/rss.png',
                             :source_name          => 'BlogPosts',

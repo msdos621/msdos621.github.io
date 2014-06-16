@@ -1,25 +1,6 @@
 ---
 layout: default
 ---
-{% for post in site.posts limit:1 %}
-<hr/>
-<div class="row">
-    <div class="small-2 columns">
-        <p>
-            <a href="/blog"><img src="/assets/images/social/rss.png"></a>
-        </p>
-        {{ post.date | date_to_string }}
-    </div>
-    <div class="small-10 columns">
-        <p>
-            <a href="{{ post.url | prepend: site.baseurl }}">Posted: {{ post.title }}</a>
-            <br>
-            {{ post.excerpt | strip_html }}...
-        </p>
-    </div>
-</div>
-{% endfor %}
-
 {% for item in page.feed_items %}
 <hr/>
 <div class="row">

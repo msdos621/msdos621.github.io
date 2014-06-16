@@ -15,11 +15,17 @@ permalink: pretty
 highlighter: pygments
 
 #Superfeed settings
+blog_feed_limit: 5
+superfeed_days_back: 14
+
 last_fm_username: 'usbsnowcrash'
-last_fm_limit: '4'
+last_fm_limit: 3
 last_fm_icon: ''
 
 instagram_id: '54558149'
 instagram_username: 'usbsnowcrash'
-instagram_limit: '4'
+instagram_limit: 3
 instagram_icon: ''
+
+github_username: 'usbsnowcrash'
+github_limit: 3
