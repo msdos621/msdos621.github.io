@@ -7,6 +7,65 @@
     <atom:link href="http://debug.ninja/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Positive.txt</title>
+        <description>&lt;p&gt;In order to keep things in perspective I’ve taken to collecting the kind words people send my way.  This is not really an ego booster (altough I sometimes use it that way). Instead this is something I do to keep things in perspective.  I have this saved on my computer as positive.txt.  So here are some example entries.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I admire how positive and cheerful you always are around other people. ^.^
+- CB&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;And I’m really proud of the progress you’ve made, in all aspects 
+And you did it a helluva lot faster than I ever could, which is amazing
+So, &amp;lt;3 And I totally agree with everyone else - My world needs a JeffJeff in it! 
+- CC&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Thanks, Jeff. You’re a good friend. I have to go now. Good night.
+- CY&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Words fail.
+Your respect and continued attention is an honor and given this peculiar understanding, there are very few things I treasure more highly.
+- AW&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I love you, Jeff, and I really think we both benefit from talking to each other about these things.  Let’s try to remember that more often when we’re feeling low.
+- RC&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Jeff, you’ve been a really great friend to me for the longest time. Things can get tough and it is unimaginable for people not in your shoes to know how it truly feels. You’re tenacity in the face of internal struggle, where I’ve seen so many wilt where you carry on, it never ceases to amaze me. 
+As you’ve found out, the best help usually comes from within, but know you’ve always got a friend in me.
+- MM&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;…your tenacity and perserverance has always been your strength and the most admirable qualities in you. You are a great mentor and a very kind person. I am sorry you had to go through such painful periods in your life.. But experience tells me that your present prepares you like nothing else for your future ..Take care my friend and the world is always brighter with your wit added to it
+- KR&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I just wanted you to know that you’re not alone in your struggles. And I’m in complete awe of your perseverance, honesty, and openness. I’m always here to talk to, even if I’m the worst at getting out of my house to come see people. ::huggles:
+- CH&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Your ability to persevere is leaps and bounds above &lt;em&gt;anyone&lt;/em&gt; I know…it’s made you observably successful in everything I’ve seen you do. I know I’m not the most compassionate or empathetic friend, but if you need anything at all, or just want to have a beer &amp;amp; get things off your chest, come find me - you know where I live
+- CL&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+        <pubDate>Sun, 22 Jun 2014 11:02:00 -0400</pubDate>
+        <link>http://debug.ninja/2014/06/22/Positive-txt/</link>
+        <guid isPermaLink="true">http://debug.ninja/2014/06/22/Positive-txt/</guid>
+      </item>
+    
+      <item>
         <title>My Jekyll Workflow</title>
         <description>&lt;h5 id=&quot;my-blog-setup&quot;&gt;My Blog setup&lt;/h5&gt;
 &lt;p&gt;I use &lt;a href=&quot;https://pages.github.com/&quot;&gt;github pages&lt;/a&gt; to host my blog.  It is free, its fast and since this is a programming related blog it makes sense.  Also it means, right out of the box, I have source control which I think is neat. I can also publish my blog from any machine with git access (pretty much all my machines).  Another bonus is that every time I work on my blog my github stats are updated which makes me look a lot more active on github.  Finally they support custom domains out of the box so I could purchase this sweet .ninja domain.&lt;/p&gt;
