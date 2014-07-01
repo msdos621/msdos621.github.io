@@ -7,6 +7,37 @@
     <atom:link href="http://debug.ninja/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Management Philosophy</title>
+        <description>&lt;p&gt;Recently a college of mine asked me what my management philosophy is and I decided to put it into writing. First a little background, in my almost 10 year career I have lead a team as large as 12 people spanning two continents and as small as one other person (more like an apprentice). These ideas are not entirely my own, they are an amalgamation of many different sources and experiences.&lt;/p&gt;
+
+&lt;h4 id=&quot;first-what-does-a-leader-do&quot;&gt;First what does a leader do?&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Make sure others get an opportunity to speak up&lt;/li&gt;
+  &lt;li&gt;Provide feedback and foster talent&lt;/li&gt;
+  &lt;li&gt;Make decisions&lt;/li&gt;
+  &lt;li&gt;Set expectations&lt;/li&gt;
+  &lt;li&gt;Take responsibility to for team failures&lt;/li&gt;
+  &lt;li&gt;Build relationships inside and outside the team&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;how-i-view-management&quot;&gt;How I view management&lt;/h4&gt;
+&lt;p&gt;Speaking generically, I am a very hands off kind of boss. I do not micromanage and for the most part. I am not interested in very fine details of your day to day work. This is partly because of my personality (I am not a very detailed person), instead I prefer people to work independently with as much freedom from direction as they can reasonably have while I set high level strategy.&lt;/p&gt;
+
+&lt;h4 id=&quot;my-history-of-being-managed&quot;&gt;My history of being managed&lt;/h4&gt;
+&lt;p&gt;I have had many different styles of bosses myself while I have worked here and I tried to be an amalgamation of all the different aspects I liked about them. From Hari I got the idea of strong technical internship (and I was amazed at his ability to remember everything), from Kevin I got freedom to determine my work and that I should act as a shield against the business, from Steve I got the idea of providing vision about the higher level functions of the company as well as some really practical advice about how to guide people in their careers.&lt;/p&gt;
+
+&lt;h4 id=&quot;i-dont-actually-manage-people&quot;&gt;I don’t actually manage people&lt;/h4&gt;
+&lt;p&gt;One thing, I do not feel that I manage people. I don’t want to be a manager, I want to be a leader. A manager tells someone what to do and people do it because there is a reporting relationship on paper that says they have to. Managers don’t take big risks, they are driven by rigid deadlines and its a death march to reach them. I have worked for managers and it was not fun. Even when I didn’t have anyone reporting to me I was still in all the Tech leadership meetings because being a leader is a matter of influence not a matter of organization.&lt;/p&gt;
+
+&lt;h4 id=&quot;craftsmanship&quot;&gt;Craftsmanship&lt;/h4&gt;
+&lt;p&gt;I view software engineering as more of a craft than a science and thus the people I work with are craftsmen. My role is more like a master smith that has apprentices and journeymen underneath me. I am not driven by a rigid deadline rather I am focused on people (using charisma to form coalitions and helping my employees get better) as well as taking risks and pushing boundaries in support of a goal. To use yet another analogy, I view myself as a battlefield commander, I am deployed with the units doing the fighting.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 01 Jul 2014 16:00:00 -0400</pubDate>
+        <link>http://debug.ninja/2014/07/01/Managment-Philosophy/</link>
+        <guid isPermaLink="true">http://debug.ninja/2014/07/01/Managment-Philosophy/</guid>
+      </item>
+    
+      <item>
         <title>Positive.txt</title>
         <description>&lt;p&gt;In order to keep things in perspective I’ve taken to collecting the kind words people send my way.  This is not really an ego booster (altough I sometimes use it that way). Instead this is something I do to keep things in perspective.  I have this saved on my computer as positive.txt.  So here are some example entries.&lt;/p&gt;
 

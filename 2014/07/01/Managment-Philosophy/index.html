@@ -3,11 +3,11 @@
   <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Setting up my ruby envrionment (Ubuntu 13.10) | Debug Ninja</title>
+	<title>Management Philosophy | Debug Ninja</title>
 <link href='/assets/global-0a7a6c583d3937f7dd66aa26e37932dd.css' rel='stylesheet' type='text/css' />
 
-	<link rel="canonical" href="http://debug.ninja/2013/11/17/setting-up-my-ruby-envrionment-ubuntu-13-10/">
-	<meta name="description" content="Setting up my ruby envrionment (Ubuntu 13.10)">
+	<link rel="canonical" href="http://debug.ninja/2014/07/01/Managment-Philosophy/">
+	<meta name="description" content="Management Philosophy">
 </head>
 
     <body>
@@ -40,8 +40,8 @@
           <div class="row">
             <div class="small-12 medium-9 columns" role="content">
               <article>
- 	<h3><a href="#">Setting up my ruby envrionment (Ubuntu 13.10)</a></h3>
- 	<h6>Written by Jeffery Yeary on Nov 17, 2013</h6>
+ 	<h3><a href="#">Management Philosophy</a></h3>
+ 	<h6>Written by Jeffery Yeary on Jul 1, 2014</h6>
     <h6>
         
         <ul class="inline-list right">
@@ -49,9 +49,9 @@
             
               
      
-    	<li><a href="/tags/#programming-ref">programming</a></li>
+    	<li><a href="/tags/#mental health-ref">mental health</a></li>
      
-    	<li><a href="/tags/#ruby-ref">ruby</a></li>
+    	<li><a href="/tags/#management-ref">management</a></li>
     
   
 
@@ -61,65 +61,29 @@
         
     </h6>
     <hr />
-	<p>My machine at home is a monster.  It has dual SSDs in a raid 0 config and a ton of ram.  It is basically a dream to code on.  I recently switched over to ubuntu since most of my development is shifting to ruby and I use a mac to develop at work.  My current stack is rbenv, phantomjs, nodejs, redis (for the session store / other stuff). I was surprised to find that it was actually easier to setup in linux than it was on my mac.Here are the steps I took for Ubuntu 13.10</p>
+	<p>Recently a college of mine asked me what my management philosophy is and I decided to put it into writing. First a little background, in my almost 10 year career I have lead a team as large as 12 people spanning two continents and as small as one other person (more like an apprentice). These ideas are not entirely my own, they are an amalgamation of many different sources and experiences.</p>
 
-<h6 id="first-install-rbenv">First install RBEnv</h6>
+<h4 id="first-what-does-a-leader-do">First what does a leader do?</h4>
+<ul>
+  <li>Make sure others get an opportunity to speak up</li>
+  <li>Provide feedback and foster talent</li>
+  <li>Make decisions</li>
+  <li>Set expectations</li>
+  <li>Take responsibility to for team failures</li>
+  <li>Build relationships inside and outside the team</li>
+</ul>
 
-<div class="highlight"><pre><code class="bash">git clone git://github.com/sstephenson/rbenv.git .rbenv
-<span class="nb">echo</span> <span class="s1">&#39;&#39;</span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;$HOME/.rbenv/bin:$PATH&quot;</span><span class="s1">&#39;&#39;</span> &gt;&gt; ~/.bashrc
-<span class="nb">echo</span> <span class="s1">&#39;&#39;</span><span class="nb">eval</span> <span class="s2">&quot;$(rbenv init -)&quot;</span><span class="s1">&#39;&#39;</span> &gt;&gt; ~/.bashrc</code></pre></div>
+<h4 id="how-i-view-management">How I view management</h4>
+<p>Speaking generically, I am a very hands off kind of boss. I do not micromanage and for the most part. I am not interested in very fine details of your day to day work. This is partly because of my personality (I am not a very detailed person), instead I prefer people to work independently with as much freedom from direction as they can reasonably have while I set high level strategy.</p>
 
-<h6 id="install-ruby-build">Install ruby build</h6>
+<h4 id="my-history-of-being-managed">My history of being managed</h4>
+<p>I have had many different styles of bosses myself while I have worked here and I tried to be an amalgamation of all the different aspects I liked about them. From Hari I got the idea of strong technical internship (and I was amazed at his ability to remember everything), from Kevin I got freedom to determine my work and that I should act as a shield against the business, from Steve I got the idea of providing vision about the higher level functions of the company as well as some really practical advice about how to guide people in their careers.</p>
 
-<div class="highlight"><pre><code class="bash">git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
-<span class="nb">echo</span> <span class="s1">&#39;&#39;</span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;$HOME/.rbenv/plugins/ruby-build/bin:$PATH&quot;</span><span class="s1">&#39;&#39;</span> &gt;&gt; ~/.bashrc</code></pre></div>
+<h4 id="i-dont-actually-manage-people">I don’t actually manage people</h4>
+<p>One thing, I do not feel that I manage people. I don’t want to be a manager, I want to be a leader. A manager tells someone what to do and people do it because there is a reporting relationship on paper that says they have to. Managers don’t take big risks, they are driven by rigid deadlines and its a death march to reach them. I have worked for managers and it was not fun. Even when I didn’t have anyone reporting to me I was still in all the Tech leadership meetings because being a leader is a matter of influence not a matter of organization.</p>
 
-<h6 id="install-your-chosen-version-of-ruby">Install your chosen version of Ruby</h6>
-
-<div class="highlight"><pre><code class="bash">rbenv install 1.9.3p448
-rbenv global 1.9.3p448
-ruby -v</code></pre></div>
-
-<h6 id="install-some-rails-prereqs-nodejs-for-the-asset-pipelinesince-ubuntu-1304-has-an-old-version-of-node-we-are-going-to-grab-one-from-chris-leas-repo">Install some rails prereqs (nodejs for the asset pipeline)Since Ubuntu 13.04 has an old version of Node we are going to grab one from Chris Lea’s repo</h6>
-
-<div class="highlight"><pre><code class="bash">sudo add-apt-repository ppa:chris-lea/node.js
-sudo apt-get update
-sudo apt-get install nodejs</code></pre></div>
-
-<h6 id="install-your-chosen-version-of-rails">Install your chosen version of Rails</h6>
-
-<div class="highlight"><pre><code class="bash">gem install rails
-rbenv rehash
-rails -v</code></pre></div>
-
-<h6 id="install-redis-for-your-session-store">Install redis (for your session store)</h6>
-
-<div class="highlight"><pre><code class="bash">sudo apt-get install tcl
-wget http://download.redis.io/redis-stable.tar.gz
-tar xvzf redis-stable.tar.gz
-<span class="nb">cd </span>redis-stable
-make
-<span class="nb">cd </span>src
-sudo cp redis-server /usr/local/bin/
-sudo cp redis-cli /usr/local/bin/
-<span class="nb">cd</span>
-rm -rf redis-stable
-rm redis-stable.tar.gz</code></pre></div>
-
-<h6 id="install-phantomjs-to-help-test-javascript">Install phantomjs (to help test javascript)</h6>
-
-<div class="highlight"><pre><code class="bash"><span class="nb">cd</span> /usr/local/share/
-sudo wget http://phantomjs.googlecode.com/files/phantomjs-1.8.1-linux-x86_64.tar.bz2
-sudo tar jxvf phantomjs-1.8.1-linux-x86_64.tar.bz2
-sudo ln -s /usr/local/share/phantomjs-1.8.1-linux-x86_64/ /usr/local/share/phantomjs
-sudo ln -s /usr/local/share/phantomjs/bin/phantomjs /usr/local/bin/phantomjs
-sudo rm phantomjs-1.8.1-linux-x86_64.tar.bz2</code></pre></div>
-
-<p>Congrats you are now ready to code some stuff.
-These commands were lovingly sourced from a lot of different places
-- Go Rails setup guide
-- Redis quick start guide
-- Phantom JS (codecuriosity.com)</p>
+<h4 id="craftsmanship">Craftsmanship</h4>
+<p>I view software engineering as more of a craft than a science and thus the people I work with are craftsmen. My role is more like a master smith that has apprentices and journeymen underneath me. I am not driven by a rigid deadline rather I am focused on people (using charisma to form coalitions and helping my employees get better) as well as taking risks and pushing boundaries in support of a goal. To use yet another analogy, I view myself as a battlefield commander, I am deployed with the units doing the fighting.</p>
 
     <p>
         <h6>Share</h6>
@@ -136,11 +100,11 @@ These commands were lovingly sourced from a lot of different places
     <p>    
         <ul class="inline-list text-center">
             
-            <li><a href="/2013/07/13/net-wrapper-for-pagerduty-api/" title=".Net wrapper for PagerDuty API ">&laquo; Previous</a></li>
+            <li><a href="/2014/06/22/Positive-txt/" title="Positive.txt">&laquo; Previous</a></li>
             
             <li><a href="/blog/">All</a></li>
             
-            <li><a href="/2014/06/01/Quick-Dirty-Last-FM-Feed/" title="Quick and Dirty Last FM Feed parsing in ruby">Next &raquo;</a></li>
+            <li><a>Next &rarr;</a>
             
         </ul>
     </p>
@@ -246,8 +210,8 @@ These commands were lovingly sourced from a lot of different places
 
 <script type="text/javascript">
 var a2a_config = a2a_config || {};
-a2a_config.linkname = "Setting up my ruby envrionment (Ubuntu 13.10)";
-a2a_config.linkurl = "http://debug.ninja/2013/11/17/setting-up-my-ruby-envrionment-ubuntu-13-10/";
+a2a_config.linkname = "Management Philosophy";
+a2a_config.linkurl = "http://debug.ninja/2014/07/01/Managment-Philosophy/";
 a2a_config.color_main = "D7E5ED";
 a2a_config.color_border = "AECADB";
 a2a_config.color_link_text = "333333";

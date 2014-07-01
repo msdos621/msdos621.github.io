@@ -3,6 +3,12 @@
   
   
   <url>
+    <loc>http://debug.ninja/2014/07/01/Managment-Philosophy/</loc>
+    <lastmod>2014-07-01T16:00:00-04:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://debug.ninja/2014/06/22/Positive-txt/</loc>
     <lastmod>2014-06-22T11:02:00-04:00</lastmod>
     <priority>0.8</priority>
@@ -47,42 +53,42 @@
   
   <url>
     <loc>http://debug.ninja/about/</loc>
-    <lastmod>2014-07-01T15:53:49-04:00</lastmod>
+    <lastmod>2014-07-01T19:13:40-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://debug.ninja/blog/</loc>
-    <lastmod>2014-07-01T15:53:49-04:00</lastmod>
+    <lastmod>2014-07-01T19:13:40-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://debug.ninja/</loc>
-    <lastmod>2014-07-01T15:53:49-04:00</lastmod>
+    <lastmod>2014-07-01T19:13:40-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
     <loc>http://debug.ninja/tags/</loc>
-    <lastmod>2014-07-01T15:53:49-04:00</lastmod>
+    <lastmod>2014-07-01T19:13:40-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://debug.ninja/tools/</loc>
-    <lastmod>2014-07-01T15:53:49-04:00</lastmod>
+    <lastmod>2014-07-01T19:13:40-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://debug.ninja/tools/url_encode_decode/</loc>
-    <lastmod>2014-07-01T15:53:49-04:00</lastmod>
+    <lastmod>2014-07-01T19:13:40-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
