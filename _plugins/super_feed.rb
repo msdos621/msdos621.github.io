@@ -2,7 +2,7 @@ require 'forwardable'
 require 'ostruct'
 require 'net/http'
 require 'json'
-require 'pry'
+#require 'pry'
 require 'dotenv'
 
 module Jekyll
