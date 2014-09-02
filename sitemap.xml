@@ -53,42 +53,42 @@
   
   <url>
     <loc>http://debug.ninja/about/</loc>
-    <lastmod>2014-08-10T12:22:59-04:00</lastmod>
+    <lastmod>2014-09-01T22:06:13-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://debug.ninja/blog/</loc>
-    <lastmod>2014-08-10T12:22:59-04:00</lastmod>
+    <lastmod>2014-09-01T22:06:13-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://debug.ninja/</loc>
-    <lastmod>2014-08-10T12:22:59-04:00</lastmod>
+    <lastmod>2014-09-01T22:06:13-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
     <loc>http://debug.ninja/tags/</loc>
-    <lastmod>2014-08-10T12:22:59-04:00</lastmod>
+    <lastmod>2014-09-01T22:06:13-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://debug.ninja/tools/</loc>
-    <lastmod>2014-08-10T12:22:59-04:00</lastmod>
+    <lastmod>2014-09-01T22:06:13-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://debug.ninja/tools/url_encode_decode/</loc>
-    <lastmod>2014-08-10T12:22:59-04:00</lastmod>
+    <lastmod>2014-09-01T22:06:13-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
