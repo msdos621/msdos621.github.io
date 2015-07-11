@@ -16,9 +16,11 @@
 - /_assets/js/vendor/jquery.js
 - /_assets/js/foundation.min.js
 - /_assets/js/url_encode_decode.js
-{% endjavascript_asset_tag %}  
+{% endjavascript_asset_tag %}
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
   <script>
     $(document).foundation();
+    hljs.initHighlightingOnLoad();
   </script>
 {% if page.path contains '_posts' %}
 <script type="text/javascript">

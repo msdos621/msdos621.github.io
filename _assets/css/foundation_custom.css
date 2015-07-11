@@ -34,7 +34,7 @@ html, body {
 html, body {
     font-size: 100%}
 body {
-    background: #fff;
+    background: #22282A;
     color: #e9f2f3;
     padding: 0;
     margin: 0;
@@ -5169,19 +5169,10 @@ th.show-for-print {
 }
 
 /***Foundation Overrides***/
-body {
-    
-	background-color:  #22282A;
-    
-}
 .top-bar .name h1 a {
-    
 	color: #8580BD;
-    
 }
 
 aside h5  {
-    
 	color: #93C459;
-    
 }
