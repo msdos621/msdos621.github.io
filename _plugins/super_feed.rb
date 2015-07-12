@@ -116,15 +116,23 @@ module Jekyll
         item = FeedItem.new(:icon                 => '/assets/images/social/github2.png',
                             :source_name          => 'Github',
                             :title                => "#{git['actor']['login']} #{convert_type(git)}",
-                            :title_link           => git['repo']['url'],
-                            :snippet              => "#{git['repo']['name']}",
-                            :image_preview_uri    => "#{git['actor']['avatar_url']}?v=3&s=100" ,
+                            :title_link           => generate_link(git),
+                            :snippet              => nil,
+                            :image_preview_uri    => nil ,
                             :published            => DateTime.parse(git['created_at']).to_time,
                             :profile_link         => "https://github.com/#{username}")
+        #"Repo: #{git['repo']['name']}"
         #binding.pry unless item.snippet.include?('triggered from publish script')
         parsed_git.push item unless git['repo']['name'].include?('usbsnowcrash.github.io')
       end
       parsed_git.sort { |a,b| a.published <=> b.published }.last(limit)
+    end
+
+    def generate_link(git)
+      return git['payload']['pull_request']['html_url'] if git['type'] == 'PullRequestEvent'
+      #return git['payload']['commits']['url'] if git['type'] == 'PushRequestEvent'
+
+      git['repo']['url'].gsub('api.github.com','github.com').gsub('/repos','')
     end
 
     def convert_type(git)
