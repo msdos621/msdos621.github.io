@@ -1,6 +1,6 @@
 #publish.sh
 rm -rf ../usbsnowcrash.github.io/*
-jekyll build --destination ../usbsnowcrash.github.io/
+bundle exec jekyll build --destination ../usbsnowcrash.github.io/
 cd ../usbsnowcrash.github.io/
 git add -u .
 git add .
