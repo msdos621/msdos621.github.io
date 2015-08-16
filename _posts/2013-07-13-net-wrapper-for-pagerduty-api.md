@@ -2,6 +2,7 @@
 layout: post
 title: ! '.Net wrapper for PagerDuty API '
 date: '2013-07-13T17:12:14-04:00'
+image: /assets/article_images/quick_dirty.jpg
 tags:
 - c#
 - code
