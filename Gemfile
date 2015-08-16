@@ -1,0 +1,7 @@
+source 'https://rubygems.org'
+gem 'github-pages'
+gem 'pry'
+gem 'rb-readline'
+gem 'dotenv'
+gem 'bourbon'
+gem 'jemoji'
