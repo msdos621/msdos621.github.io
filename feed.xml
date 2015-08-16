@@ -5,8 +5,8 @@
     <description>This is the portfolio / blog / space on the internet of Jeffery Yeary, a software architect with a passion for music, coding, fitness and art.</description>
     <link>http://debug.ninja/</link>
     <atom:link href="http://debug.ninja/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 15 Aug 2015 23:30:10 -0400</pubDate>
-    <lastBuildDate>Sat, 15 Aug 2015 23:30:10 -0400</lastBuildDate>
+    <pubDate>Sat, 15 Aug 2015 23:48:44 -0400</pubDate>
+    <lastBuildDate>Sat, 15 Aug 2015 23:48:44 -0400</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
     
       <item>
@@ -349,7 +349,7 @@ Here is an example of my parsing my most recent tracks on last fm.&lt;/p&gt;
       </item>
     
       <item>
-        <title>Setting up my ruby envrionment (Ubuntu 13.10)</title>
+        <title>Setting up my ruby environment (Ubuntu 13.10)</title>
         <description>&lt;p&gt;My machine at home is a monster.  It has dual SSDs in a raid 0 config and a ton of ram.  It is basically a dream to code on.  I recently switched over to ubuntu since most of my development is shifting to ruby and I use a mac to develop at work.  My current stack is rbenv, phantomjs, nodejs, redis (for the session store / other stuff). I was surprised to find that it was actually easier to setup in linux than it was on my mac.Here are the steps I took for Ubuntu 13.10&lt;/p&gt;
 
 &lt;h6&gt;First install RBEnv&lt;/h6&gt;
