@@ -1,18 +1,44 @@
+# Build settings
+markdown: redcarpet
+highlighter: pygments
+permalink: pretty
+gems:
+  - jemoji
+
 # Site settings
 title: 'Debug Ninja'
-email: 'jeffery.yeary@gmail.com'
-authorname: Jeffery Yeary
 description: 'This is the portfolio / blog / space on the internet of Jeffery Yeary, a software architect with a passion for music, coding, fitness and art.'
-baseurl: ''
-url: 'http://debug.ninja'
+email: 'blog@debug.ninja'
+#blog logo
+logo: "/assets/images/debug_ninja2.png"
+# blog cover
+cover: "/assets/images/cover1.jpg"
 
-gems:
-  - jekyll-sitemap
+name: 'Jeffery Yeary'
+author: 'Jeffery Yeary'
+author_image: "/assets/images/author2.jpg"
 
-# Build settings
-markdown: kramdown
-permalink: pretty
-highlighter: pygments
+paginate:	5
+
+url: 'http://debug.ninja' # the base hostname & protocol for your site
+baseurl: ""
+
+# social icons and sharing options
+social:
+  - icon:	twitter
+    url:	https://twitter.com/usbsnowcrash
+    desc: Follow me on twitter
+    share_url: http://twitter.com/share
+    share_title: ?text=
+    share_link: "&amp;url="
+
+  - icon:	github
+    url:	https://github.com/usbsnowcrash
+    desc:	Fork me on github
+    share_url:
+    share_title:
+    share_link:
+
 
 #Superfeed settings
 blog_feed_limit: 5

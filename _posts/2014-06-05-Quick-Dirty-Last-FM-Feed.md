@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  Quick and Dirty Last FM Feed parsing in ruby
-author: Jeffery Yeary
 date:   2014-06-01 17:53:23
-tags:
+image: /assets/article_images/quick_dirty.jpg
+categories:
 - jekyll
 - ruby
 - code

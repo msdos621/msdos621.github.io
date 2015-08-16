@@ -1,25 +1,25 @@
-<!doctype html>
-<html class="no-js" lang="en">
+<!DOCTYPE html>
+<html>
+
   {% include head.html %}
-    <body>
 
-    <div class="off-canvas-wrap" data-offcanvas>
-      <div class="inner-wrap">
-        {% include header.html %}
-        <section class="main-section">
-          <div class="row">
-            <div class="small-12 medium-9 columns" role="content">
-              {{ content }}
-            </div>
-            <div class="small-12 large-3"></div>
-            <br />
-            {% include sidenav.html %}
-          </div>
-        </section>
+  <body>
 
-        <a class="exit-off-canvas"></a>
-        {% include footer.html %}
+    {% include header.html %}
+
+    <!-- content start -->
+
+    <div class="page-content">
+      <div class="wrapper">
+        {{ content }}
       </div>
     </div>
-    </body>
+
+    <!-- content end -->
+
+    {% include footer.html %}
+    {% include javascripts.html %}
+
+  </body>
+
 </html>

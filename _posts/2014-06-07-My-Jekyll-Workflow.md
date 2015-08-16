@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  My Jekyll Workflow
-author: Jeffery Yeary
+image: /assets/article_images/cooking.jpg
 date:   2014-06-07 10:45:00
-tags:
+categories:
 - jekyll
 - bash
 - code
