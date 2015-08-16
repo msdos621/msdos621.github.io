@@ -2,7 +2,7 @@
 layout: post
 title: Setting up my ruby envrionment (Ubuntu 13.10)
 date: '2013-11-17T00:39:00-05:00'
-categories:
+tags:
 - programming
 - ruby
 tumblr_url: http://psychicdebugging.tumblr.com/post/67229039192/setting-up-my-ruby-envrionment-ubuntu-13-10

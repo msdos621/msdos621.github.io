@@ -3,7 +3,7 @@ layout: post
 title:  Quick and Dirty Last FM Feed parsing in ruby
 date:   2014-06-01 17:53:23
 image: /assets/article_images/quick_dirty.jpg
-categories:
+tags:
 - jekyll
 - ruby
 - code

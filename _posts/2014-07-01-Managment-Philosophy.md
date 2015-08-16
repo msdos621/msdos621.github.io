@@ -4,7 +4,7 @@ title:  Management Philosophy
 image: /assets/article_images/mgmt.jpg
 date:   2014-07-01 20:00:00
 tags: featured
-categories:
+tags:
 - mental health
 - management
 ---

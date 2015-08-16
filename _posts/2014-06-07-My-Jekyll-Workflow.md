@@ -3,7 +3,7 @@ layout: post
 title:  My Jekyll Workflow
 image: /assets/article_images/cooking.jpg
 date:   2014-06-07 10:45:00
-categories:
+tags:
 - jekyll
 - bash
 - code

@@ -2,7 +2,7 @@
 layout: post
 title: ! '.Net wrapper for PagerDuty API '
 date: '2013-07-13T17:12:14-04:00'
-categories:
+tags:
 - c#
 - code
 tumblr_url: http://psychicdebugging.tumblr.com/post/55367079104/net-wrapper-for-pagerduty-api

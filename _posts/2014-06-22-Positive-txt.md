@@ -3,7 +3,7 @@ layout: post
 title:  Positive.txt
 image: /assets/article_images/cheers.jpg
 date:   2014-06-22 15:02:00
-categories:
+tags:
 - mental health
 - positive
 - lifestyle

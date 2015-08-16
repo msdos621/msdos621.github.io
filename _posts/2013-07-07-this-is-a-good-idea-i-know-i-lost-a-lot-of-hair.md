@@ -2,7 +2,7 @@
 layout: post
 title: This is a good idea
 date: '2013-07-07T17:42:22-04:00'
-categories:
+tags:
 - programming
 - humor
 tumblr_url: http://psychicdebugging.tumblr.com/post/54858972575/this-is-a-good-idea-i-know-i-lost-a-lot-of-hair
