@@ -5,8 +5,8 @@
     <description>This is the portfolio / blog / space on the internet of Jeffery Yeary, a software architect with a passion for music, coding, fitness and art.</description>
     <link>http://debug.ninja/</link>
     <atom:link href="http://debug.ninja/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 15 Aug 2015 23:22:49 -0400</pubDate>
-    <lastBuildDate>Sat, 15 Aug 2015 23:22:49 -0400</lastBuildDate>
+    <pubDate>Sat, 15 Aug 2015 23:30:10 -0400</pubDate>
+    <lastBuildDate>Sat, 15 Aug 2015 23:30:10 -0400</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
     
       <item>
@@ -44,15 +44,13 @@ I am not interested in the fine details of your day to day work.  This is partly
 &lt;p&gt;I view software engineering as more of a craft than a science and thus the people I work with are craftsmen.  My role is more like a master smith that has apprentices and journeymen underneath me. I am not driven by a rigid deadline rather I am focused on people (using charisma to form coalitions and helping my employees get better) as well as taking risks and pushing boundaries in support of a goal.  To use yet another analogy, I view myself as a battlefield commander, I am deployed with the units doing the fighting.&lt;/p&gt;
 </description>
         <pubDate>Tue, 01 Jul 2014 16:00:00 -0400</pubDate>
-        <link>http://debug.ninja/mental%20health/management/2014/07/01/Managment-Philosophy/</link>
-        <guid isPermaLink="true">http://debug.ninja/mental%20health/management/2014/07/01/Managment-Philosophy/</guid>
-        
-        <category>featured</category>
-        
+        <link>http://debug.ninja/2014/07/01/Managment-Philosophy/</link>
+        <guid isPermaLink="true">http://debug.ninja/2014/07/01/Managment-Philosophy/</guid>
         
         <category>mental health</category>
         
         <category>management</category>
+        
         
       </item>
     
@@ -83,15 +81,15 @@ As you&amp;#39;ve found out, the best help usually comes from within, but know y
 &lt;p&gt;Your ability to persevere is leaps and bounds above &lt;em&gt;anyone&lt;/em&gt; I know...it&amp;#39;s made you observably successful in everything I&amp;#39;ve seen you do. I know I&amp;#39;m not the most compassionate or empathetic friend, but if you need anything at all, or just want to have a beer &amp;amp; get things off your chest, come find me - you know where I live - CL&lt;/p&gt;
 </description>
         <pubDate>Sun, 22 Jun 2014 11:02:00 -0400</pubDate>
-        <link>http://debug.ninja/mental%20health/positive/lifestyle/2014/06/22/Positive-txt/</link>
-        <guid isPermaLink="true">http://debug.ninja/mental%20health/positive/lifestyle/2014/06/22/Positive-txt/</guid>
-        
+        <link>http://debug.ninja/2014/06/22/Positive-txt/</link>
+        <guid isPermaLink="true">http://debug.ninja/2014/06/22/Positive-txt/</guid>
         
         <category>mental health</category>
         
         <category>positive</category>
         
         <category>lifestyle</category>
+        
         
       </item>
     
@@ -262,15 +260,15 @@ git push origin blog&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;If you want to see how anything else works feel free to head over to the &lt;a href=&quot;https://github.com/usbsnowcrash/usbsnowcrash.github.io&quot;&gt;github repo&lt;/a&gt; and check it out.&lt;/p&gt;
 </description>
         <pubDate>Sat, 07 Jun 2014 06:45:00 -0400</pubDate>
-        <link>http://debug.ninja/jekyll/bash/code/2014/06/07/My-Jekyll-Workflow/</link>
-        <guid isPermaLink="true">http://debug.ninja/jekyll/bash/code/2014/06/07/My-Jekyll-Workflow/</guid>
-        
+        <link>http://debug.ninja/2014/06/07/My-Jekyll-Workflow/</link>
+        <guid isPermaLink="true">http://debug.ninja/2014/06/07/My-Jekyll-Workflow/</guid>
         
         <category>jekyll</category>
         
         <category>bash</category>
         
         <category>code</category>
+        
         
       </item>
     
@@ -338,15 +336,15 @@ Here is an example of my parsing my most recent tracks on last fm.&lt;/p&gt;
 &lt;p&gt;You can follow my progress by watching &lt;a href=&quot;https://github.com/usbsnowcrash/usbsnowcrash.github.io/tree/superfeed_plugin&quot;&gt;this branch here&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Sun, 01 Jun 2014 13:53:23 -0400</pubDate>
-        <link>http://debug.ninja/jekyll/ruby/code/2014/06/01/Quick-Dirty-Last-FM-Feed/</link>
-        <guid isPermaLink="true">http://debug.ninja/jekyll/ruby/code/2014/06/01/Quick-Dirty-Last-FM-Feed/</guid>
-        
+        <link>http://debug.ninja/2014/06/01/Quick-Dirty-Last-FM-Feed/</link>
+        <guid isPermaLink="true">http://debug.ninja/2014/06/01/Quick-Dirty-Last-FM-Feed/</guid>
         
         <category>jekyll</category>
         
         <category>ruby</category>
         
         <category>code</category>
+        
         
       </item>
     
@@ -413,13 +411,13 @@ These commands were lovingly sourced from a lot of different places
 * Phantom JS (codecuriosity.com)&lt;/p&gt;
 </description>
         <pubDate>Sun, 17 Nov 2013 00:39:00 -0500</pubDate>
-        <link>http://debug.ninja/programming/ruby/2013/11/17/setting-up-my-ruby-envrionment-ubuntu-13-10/</link>
-        <guid isPermaLink="true">http://debug.ninja/programming/ruby/2013/11/17/setting-up-my-ruby-envrionment-ubuntu-13-10/</guid>
-        
+        <link>http://debug.ninja/2013/11/17/setting-up-my-ruby-envrionment-ubuntu-13-10/</link>
+        <guid isPermaLink="true">http://debug.ninja/2013/11/17/setting-up-my-ruby-envrionment-ubuntu-13-10/</guid>
         
         <category>programming</category>
         
         <category>ruby</category>
+        
         
       </item>
     
@@ -435,13 +433,13 @@ The source is on &lt;a href=&quot;https://github.com/usbsnowcrash/PagerDuty.Net&
 &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alerts&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;svc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GetAlerts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DateTime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AddDays&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(-&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DateTime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Unspecified&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 </description>
         <pubDate>Sat, 13 Jul 2013 17:12:14 -0400</pubDate>
-        <link>http://debug.ninja/c%23/code/2013/07/13/net-wrapper-for-pagerduty-api/</link>
-        <guid isPermaLink="true">http://debug.ninja/c%23/code/2013/07/13/net-wrapper-for-pagerduty-api/</guid>
-        
+        <link>http://debug.ninja/2013/07/13/net-wrapper-for-pagerduty-api/</link>
+        <guid isPermaLink="true">http://debug.ninja/2013/07/13/net-wrapper-for-pagerduty-api/</guid>
         
         <category>c#</category>
         
         <category>code</category>
+        
         
       </item>
     
@@ -506,13 +504,13 @@ Its super easy to add a new feed type (see code below):&lt;/p&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 </description>
         <pubDate>Sat, 13 Jul 2013 16:24:24 -0400</pubDate>
-        <link>http://debug.ninja/c%23/code/2013/07/13/new-module-for-superfeed/</link>
-        <guid isPermaLink="true">http://debug.ninja/c%23/code/2013/07/13/new-module-for-superfeed/</guid>
-        
+        <link>http://debug.ninja/2013/07/13/new-module-for-superfeed/</link>
+        <guid isPermaLink="true">http://debug.ninja/2013/07/13/new-module-for-superfeed/</guid>
         
         <category>c#</category>
         
         <category>code</category>
+        
         
       </item>
     
@@ -522,13 +520,13 @@ Its super easy to add a new feed type (see code below):&lt;/p&gt;
 &lt;img src=&quot;/assets/images/vb6.jpg&quot; alt=&quot;VB6&quot;&gt;&lt;/p&gt;
 </description>
         <pubDate>Sun, 07 Jul 2013 17:42:22 -0400</pubDate>
-        <link>http://debug.ninja/programming/humor/2013/07/07/this-is-a-good-idea-i-know-i-lost-a-lot-of-hair/</link>
-        <guid isPermaLink="true">http://debug.ninja/programming/humor/2013/07/07/this-is-a-good-idea-i-know-i-lost-a-lot-of-hair/</guid>
-        
+        <link>http://debug.ninja/2013/07/07/this-is-a-good-idea-i-know-i-lost-a-lot-of-hair/</link>
+        <guid isPermaLink="true">http://debug.ninja/2013/07/07/this-is-a-good-idea-i-know-i-lost-a-lot-of-hair/</guid>
         
         <category>programming</category>
         
         <category>humor</category>
+        
         
       </item>
     

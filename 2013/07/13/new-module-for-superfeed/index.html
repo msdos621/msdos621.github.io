@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <!-- (1) Optimize for mobile versions: http://goo.gl/EOpFl -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- (1) force latest IE rendering engine: bit.ly/1c8EiC9 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>New module for superfeed</title>
+  <meta name="description" content="This is the portfolio / blog / space on the internet of Jeffery Yeary, a software architect with a passion for music, coding, fitness and art." />
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="canonical" href="http://debug.ninja/2013/07/13/new-module-for-superfeed/">
+
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+<!--  <link rel="stylesheet" href=""> -->
+  <link rel="stylesheet" href="http://brick.a.ssl.fastly.net/Linux+Libertine:400,400i,700,700i/Open+Sans:400,400i,700,700i">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="/css/print.css" />
+</head>
+
+  <body itemscope itemtype="http://schema.org/Article">
+    <!-- header start -->
+
+<a href="http://debug.ninja" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/debug_ninja2.png)"></span></a>
+
+<!-- header end -->
+
+    <main class="content" role="main">
+      <article class="post">
+        
+        <div class="noarticleimage">
+          <div class="post-meta">
+            <h1 class="post-title">New module for superfeed</h1>
+            <div class="cf post-meta-text">
+              <div class="author-image" style="background-image: url(/assets/images/author2.jpg)">Blog Logo</div>
+              <h4 class="author-name" itemprop="author" itemscope itemtype="http://schema.org/Person"></h4>
+              on
+              <time datetime="2013-07-13T16:24:24-04:00">13 Jul 2013</time>
+              <!-- , tagged on <span class="post-tag-">, <a href="/tag/"></a></span> -->
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        
+        <section class="post-content">
+          <div class="post-reading">
+            <span class="post-reading-time"></span> read
+          </div>
+          <a name="topofpage"></a>
+          <p>My buddy <a href="http://codersblock.com/">Will</a> has a <a href="https://github.com/lonekorean/super-feed">pretty neat piece of software</a> that combines
+all of his social feeds up on github.  I decided to fork it and add a new module for last.fm.  
+Its super easy to add a new feed type (see code below):</p>
+
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Linq</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Xml.Linq</span><span class="p">;</span>
+
+<span class="k">namespace</span> <span class="nn">CodersBlock.SuperFeed.Modules</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">LastFMFeedModule</span> <span class="p">:</span> <span class="n">FeedModuleXml</span> <span class="p">{</span>
+        <span class="k">private</span> <span class="kt">string</span> <span class="n">_username</span><span class="p">;</span>
+        <span class="k">private</span> <span class="kt">string</span> <span class="n">_apiKey</span><span class="p">;</span>
+
+        <span class="k">public</span> <span class="k">override</span> <span class="kt">string</span> <span class="n">SourceName</span> <span class="p">{</span>
+            <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="s">&quot;Last.fm&quot;</span><span class="p">;</span> <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="k">public</span> <span class="k">override</span> <span class="kt">string</span> <span class="n">SourceUri</span> <span class="p">{</span>
+            <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&quot;http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&amp;user={0}&amp;api_key={1}&amp;page=1&amp;limit={2}&quot;</span><span class="p">,</span> <span class="n">_username</span><span class="p">,</span> <span class="n">_apiKey</span><span class="p">,</span> <span class="n">_totalLimit</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span> <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="k">public</span> <span class="nf">LastFMFeedModule</span><span class="p">(</span><span class="kt">int</span> <span class="n">totalLimit</span><span class="p">,</span><span class="kt">string</span> <span class="n">apiKey</span><span class="p">,</span> <span class="kt">string</span> <span class="n">username</span><span class="p">)</span>
+            <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="n">totalLimit</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">_username</span> <span class="p">=</span> <span class="n">username</span><span class="p">;</span>
+            <span class="n">_apiKey</span> <span class="p">=</span> <span class="n">apiKey</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">protected</span> <span class="k">override</span> <span class="n">List</span> <span class="nf">ParseDocument</span><span class="p">(</span><span class="n">XDocument</span> <span class="n">doc</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">var</span> <span class="n">items</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">(</span><span class="n">_totalLimit</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">doc</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+
+                <span class="n">items</span> <span class="p">=</span> <span class="p">(</span>
+                    <span class="k">from</span> <span class="n">track</span> <span class="k">in</span> <span class="n">doc</span><span class="p">.</span><span class="n">Descendants</span><span class="p">(</span><span class="s">&quot;track&quot;</span><span class="p">)</span>
+                    <span class="k">select</span> <span class="k">new</span> <span class="nf">FeedItem</span><span class="p">(</span><span class="k">this</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="n">Published</span> <span class="p">=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">track</span><span class="p">.</span><span class="n">Element</span><span class="p">(</span><span class="s">&quot;date&quot;</span><span class="p">).</span><span class="n">Value</span><span class="p">),</span>
+                        <span class="n">Title</span> <span class="p">=</span> <span class="n">track</span><span class="p">.</span><span class="n">Element</span><span class="p">(</span><span class="s">&quot;artist&quot;</span><span class="p">).</span><span class="n">Value</span> <span class="p">+</span> <span class="s">&quot; - &quot;</span> <span class="p">+</span> <span class="n">track</span><span class="p">.</span><span class="n">Element</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">).</span><span class="n">Value</span><span class="p">,</span>
+                        <span class="n">Snippet</span> <span class="p">=</span> <span class="n">_username</span> <span class="p">+</span> <span class="s">&quot; listened to &quot;</span> <span class="p">+</span> <span class="n">track</span><span class="p">.</span><span class="n">Element</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">).</span><span class="n">Value</span> <span class="p">+</span> <span class="s">&quot; by &quot;</span> <span class="p">+</span> <span class="n">track</span><span class="p">.</span><span class="n">Element</span><span class="p">(</span><span class="s">&quot;artist&quot;</span><span class="p">).</span><span class="n">Value</span> <span class="p">+</span> <span class="s">&quot; from thier album &quot;</span> <span class="p">+</span> <span class="n">track</span><span class="p">.</span><span class="n">Element</span><span class="p">(</span><span class="s">&quot;album&quot;</span><span class="p">).</span><span class="n">Value</span><span class="p">,</span>
+                        <span class="n">ImagePreviewUri</span> <span class="p">=</span> <span class="p">(</span>
+                            <span class="k">from</span> <span class="n">image</span> <span class="k">in</span> <span class="n">track</span><span class="p">.</span><span class="n">Elements</span><span class="p">(</span><span class="s">&quot;image&quot;</span><span class="p">)</span>
+                            <span class="k">where</span> <span class="n">image</span><span class="p">.</span><span class="n">Attribute</span><span class="p">(</span><span class="s">&quot;size&quot;</span><span class="p">).</span><span class="n">Value</span> <span class="p">==</span> <span class="s">&quot;large&quot;</span>
+                            <span class="k">select</span> <span class="n">image</span><span class="p">.</span><span class="n">Value</span>
+                        <span class="p">).</span><span class="n">Single</span><span class="p">(),</span>
+                        <span class="n">ImageThumbnailUri</span> <span class="p">=</span> <span class="p">(</span>
+                            <span class="k">from</span> <span class="n">image</span> <span class="k">in</span> <span class="n">track</span><span class="p">.</span><span class="n">Elements</span><span class="p">(</span><span class="s">&quot;image&quot;</span><span class="p">)</span>
+                            <span class="k">where</span> <span class="n">image</span><span class="p">.</span><span class="n">Attribute</span><span class="p">(</span><span class="s">&quot;size&quot;</span><span class="p">).</span><span class="n">Value</span> <span class="p">==</span> <span class="s">&quot;medium&quot;</span>
+                            <span class="k">select</span> <span class="n">image</span><span class="p">.</span><span class="n">Value</span>
+                        <span class="p">).</span><span class="n">Single</span><span class="p">(),</span>
+                        <span class="n">ViewUri</span> <span class="p">=</span> <span class="n">track</span><span class="p">.</span><span class="n">Element</span><span class="p">(</span><span class="s">&quot;url&quot;</span><span class="p">).</span><span class="n">Value</span>
+                    <span class="p">}</span>
+                <span class="p">).</span><span class="n">Take</span><span class="p">(</span><span class="n">_totalLimit</span><span class="p">).</span><span class="n">ToList</span><span class="p">();</span>
+            <span class="p">}</span>
+
+            <span class="k">return</span> <span class="n">items</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+        </section>
+        <footer class="post-footer">
+          <section class="share">
+            
+              
+                <a class="icon-twitter" href="http://twitter.com/share?text=New+module+for+superfeed&amp;url=http://debug.ninja/2013/07/13/new-module-for-superfeed"
+                  onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+                <i class="fa fa-twitter"></i><span class="hidden">twitter</span>
+                </a>
+              
+            
+              
+            
+          </section>
+        </footer>
+        <div class="bottom-teaser cf">
+          <div class="isLeft">
+            <h5 class="index-headline featured"><span>Written by</span></h5>
+            <section class="author">
+              <div class="author-image" style="background-image: url(/assets/images/author2.jpg)">Blog Logo</div>
+              <h4>Jeffery Yeary</h4>
+              <p class="bio"></p>
+              <hr>
+              <p class="published">Published <time datetime="2013-07-13 16:24">13 Jul 2013</time></p>
+            </section>
+          </div>
+          
+          <div class="isRight">
+            <h5 class="index-headline featured"><span>Supported by</span></h5>
+            <footer class="site-footer">
+              <section class="poweredby">Proudly published with <a href="http://jekyllrb.com"> Jekyll</a></section>
+              <a class="subscribe" href="/feed.xml"> <span class="tooltip"> <i class="fa fa-rss"></i> You should subscribe to my feed.</span></a>
+              <div class="inner">
+                <section class="copyright">All content copyright <a href="/">Jeffery Yeary</a> &copy; 2015<br>All rights reserved.</section>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </article>
+    </main>
+    <div class="bottom-closer">
+      <div class="background-closer-image"  style="background-image: url(/assets/images/cover1.jpg)">
+        Image
+      </div>
+      <div class="inner">
+        <h1 class="blog-title">Debug Ninja</h1>
+        <h2 class="blog-description">This is the portfolio / blog / space on the internet of Jeffery Yeary, a software architect with a passion for music, coding, fitness and art.</h2>
+        <a href="/" class="btn">Back to Overview</a>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/assets/js/index.js"></script>
+<script type="text/javascript" src="/assets/js/readingTime.min.js"></script>
+<script>
+(function ($) {
+  "use strict";
+  $(document).ready(function(){
+
+    var $window = $(window),
+    $image = $('.post-image-image, .teaserimage-image');
+    
+      $window.on('scroll', function() {
+        var top = $window.scrollTop();
+
+        if (top < 0 || top > 1500) { return; }
+        $image
+          .css('transform', 'translate3d(0px, '+top/3+'px, 0px)')
+          .css('opacity', 1-Math.max(top/700, 0));
+      });
+      $window.trigger('scroll');
+
+      var height = $('.article-image').height();
+      $('.post-content').css('padding-top', height + 'px');
+
+      $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+         && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            $('html,body').animate({ scrollTop: target.offset().top }, 500);
+            return false;
+          }
+        }
+      });
+
+  });
+}(jQuery));
+</script>
+
+
+  </body>
+</html>
