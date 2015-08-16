@@ -3,11 +3,11 @@ layout: post
 title:  Management Philosophy
 image: /assets/article_images/mgmt.jpg
 date:   2014-07-01 20:00:00
-tags: featured
 tags:
 - mental health
 - management
 ---
+
 Recently a college of mine asked me what my management philosophy is and I decided to attempt to put it into writing.  First a little background, in my almost 10 year career I have lead a team as large as 12 people spanning two continents and as small as one other person (more like an apprentice).  These teams have all been software engineering teams working with consumer facing products.  I have held many different titles (team lead, lead engineer, software architect) but I was ultimately responsible for the delivery of the product and for growing and developing my team.
 
 #### My history of being "managed"
