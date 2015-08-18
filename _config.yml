@@ -32,6 +32,20 @@ social:
     share_title: ?text=
     share_link: "&amp;url="
 
+  - icon:	linkedin
+    url:	https://www.linkedin.com/in/jefferyyeary
+    desc:	View my resume on linked in
+    share_url:
+    share_title:
+    share_link:
+
+  - icon:	info
+    url:	http://vizualize.me/debug-ninja?r=debug-ninja
+    desc:	Infographic describing my work history
+    share_url:
+    share_title:
+    share_link:
+
   - icon:	github
     url:	https://github.com/usbsnowcrash
     desc:	Fork me on github
