@@ -12,12 +12,14 @@ Recently a college of mine asked me what my management philosophy is and I decid
 
 #### My history of being "managed"
 I have had many different styles of bosses myself in my career and I try to be an amalgamation of all the different aspects I liked about them.  These different experiences have shaped me as a leader.
+
 * Hari taught me the importance of strong technical mentorship (and I was amazed at his ability to remember everything)
 * Kevin gave me the freedom to determine my work and acted as a shield against the business
 * Steve provided vision about the higher level functions of the company as well as some really practical advice about how to guide people in their careers
 
 #### What does a leader do?
 Using these experiences and also utilizing all I have read this is what I think a leader should do
+
 * Make sure others get an opportunity to speak up
 * Provide feedback and foster talent
 * Make decisions
