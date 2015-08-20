@@ -8,7 +8,7 @@ tags:
 - management
 ---
 
-Recently a college of mine asked me what my management philosophy is and I decided to attempt to put it into writing.  First a little background, in my almost 10 year career I have lead a team as large as 12 people spanning two continents and as small as one other person (more like an apprentice).  These teams have all been software engineering teams working with consumer facing products.  I have held many different titles (team lead, lead engineer, software architect) but I was ultimately responsible for the delivery of the product and for growing and developing my team.
+Recently a colleague of mine asked me what my management philosophy is and I decided to attempt to put it into writing.  First a little background, in my almost 10 year career I have lead a team as large as 12 people spanning two continents and as small as one other person (more like an apprentice).  These teams have all been software engineering teams working with consumer facing products.  I have held many different titles (team lead, lead engineer, software architect) but I was ultimately responsible for the delivery of the product and for growing and developing my team.
 
 #### My history of being "managed"
 I have had many different styles of bosses myself in my career and I try to be an amalgamation of all the different aspects I liked about them.  These different experiences have shaped me as a leader.
