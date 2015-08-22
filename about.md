@@ -3,7 +3,8 @@ layout: page
 title: About
 permalink: /about/
 ---
-This is my portfolio / blog / space on the internet.  I am a software architect that specializes in large distributed web apps in ruby and .net.  I work for careerbuilder.com and I am currentlly working on moving our main site into the public cloud.  I have a passion for music, coding, staying active and art.
+This is my portfolio / blog / space on the internet.  I am a software architect that specializes in large distributed web apps in ruby and .net.  I work for careerbuilder.com and I am currentlly working on moving our main site into the public cloud.  I have a passion for music, coding, staying active and art. 
+View my [resume](/resume) or better yet my [infographic](http://vizualize.me/debug-ninja) for more about my professional background.
 
 ![Trying out aerial silks](/assets/images/aerial_gym.png)
 
