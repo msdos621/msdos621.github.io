@@ -3,12 +3,11 @@ layout: page
 title: All Posts by Tags
 header: Posts By Tag
 group: navigation
-image: /assets/article_images/silly_socks.jpg
 ---
-{% for tag in site.tags %} 
+{% for tag in site.tags %}
   <h4 id="{{ tag[0] }}-ref">{{ tag[0] }}</h4>
   <ul>
-    {% assign pages_list = tag[1] %}  
+    {% assign pages_list = tag[1] %}
     {% include pageshelper.html %}
   </ul>
 {% endfor %}
