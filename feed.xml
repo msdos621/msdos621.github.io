@@ -5,8 +5,8 @@
     <description>This is the portfolio / blog / space on the internet of Jeffery Yeary, a software architect with a passion for music, coding, fitness and art.</description>
     <link>http://debug.ninja/</link>
     <atom:link href="http://debug.ninja/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 21 Aug 2015 23:01:10 -0400</pubDate>
-    <lastBuildDate>Fri, 21 Aug 2015 23:01:10 -0400</lastBuildDate>
+    <pubDate>Thu, 03 Sep 2015 18:30:15 -0400</pubDate>
+    <lastBuildDate>Thu, 03 Sep 2015 18:30:15 -0400</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
     
       <item>
@@ -532,6 +532,59 @@ Its super easy to add a new feed type (see code below):&lt;/p&gt;
         <category>programming</category>
         
         <category>humor</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Scaling Websites</title>
+        <description>&lt;p&gt;Working for a company that has a large scaled out website (hundreds of webservers all over the country serving one code base) I am always curious to see what other large websites are doing.  Here are some neat presentations that I found from various top Internet sites.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.infoq.com/presentations/shoup-ebay-architectural-principles&quot;&gt;Ebay&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.infoq.com/presentations/Facebook-Software-Stack&quot;&gt;Facebook&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.infoq.com/presentations/Digg-Joe-Stump&quot;&gt;Digg&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.infoq.com/presentations/MySpace-Dan-Farino&quot;&gt;MySpace&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Fri, 10 Jul 2009 05:37:00 -0400</pubDate>
+        <link>http://debug.ninja/2009/07/10/Scaling-Websites/</link>
+        <guid isPermaLink="true">http://debug.ninja/2009/07/10/Scaling-Websites/</guid>
+        
+        <category>devops</category>
+        
+        <category>web scale</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Really simple backup script for IIS websites</title>
+        <description>&lt;p&gt;The file based nature of Blog Engine .Net makes me a little nervous.  I decided to whip up a little script to take nightly snapshots of my web application folder.  The goal was to create a directory with the date in it and to copy the contents of my iis folder on a schedule.  This is really just a fancy wrapper for &lt;a href=&quot;http://technet.microsoft.com/en-us/library/bb491035.aspx&quot;&gt;xcopy&lt;/a&gt; but I thought I would post it anyway.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;@ECHO OFF
+&lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;BkupDir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;C:\Backups&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;SrcDir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;D:\websites&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Year&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;%date:~10,4%
+&lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Month&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;%date:~4,2%
+&lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Day&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;%date:~7,2%
+c:
+@ECHO Creating backup directory
+mkdir %BkupDir%&lt;span class=&quot;se&quot;&gt;\%&lt;/span&gt;Year%-%Month%-%Day%
+d:
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; %SrcDir%
+ECHO Begining XCopy
+xcopy %SrcDir%&lt;span class=&quot;se&quot;&gt;\*&lt;/span&gt;.* %BkupDir%&lt;span class=&quot;se&quot;&gt;\%&lt;/span&gt;Year%-%Month%-%Day%&lt;span class=&quot;se&quot;&gt;\ &lt;/span&gt;/S /E /V /C /H /R /K /O /Y &amp;gt; %BkupDir%&lt;span class=&quot;se&quot;&gt;\%&lt;/span&gt;Year%-%Month%-%Day%&lt;span class=&quot;se&quot;&gt;\b&lt;/span&gt;kup.log&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+        <pubDate>Tue, 07 Apr 2009 13:18:00 -0400</pubDate>
+        <link>http://debug.ninja/2009/04/07/Really-Simple-Backup-Script-For-IIS-Websites/</link>
+        <guid isPermaLink="true">http://debug.ninja/2009/04/07/Really-Simple-Backup-Script-For-IIS-Websites/</guid>
+        
+        <category>devops</category>
+        
+        <category>script</category>
+        
+        <category>windows</category>
         
         
       </item>

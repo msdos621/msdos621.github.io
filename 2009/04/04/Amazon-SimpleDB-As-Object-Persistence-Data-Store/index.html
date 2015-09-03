@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <!-- (1) Optimize for mobile versions: http://goo.gl/EOpFl -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- (1) force latest IE rendering engine: bit.ly/1c8EiC9 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Using Amazon SimpleDB as an Object Persistence Data Store</title>
+  <meta name="description" content="This is the portfolio / blog / space on the internet of Jeffery Yeary, a software architect with a passion for music, coding, fitness and art." />
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@usbsnowcrash" />
+    <meta name="twitter:title" content="Using Amazon SimpleDB as an Object Persistence Data Store" />
+    <meta name="twitter:image" content="http://debug.ninja/assets/images/debug_ninja2.png" />
+    
+    <meta name="twitter:description"  content="I hate relational databases!  In a high traffic scenario they become painful to scale.  Data segmentation, replication, asynchronous updates…you can only go so far.  Schema changes alone require si..." />
+    
+  
+
+  <meta property="og:site_name" content="Debug Ninja" />
+  <meta property="og:title" content="Using Amazon SimpleDB as an Object Persistence Data Store"/>
+  
+  <meta property="og:description" content="I hate relational databases!  In a high traffic scenario they become painful to scale.  Data segmentation, replication, asynchronous updates…you can only go so far.  Schema changes alone require si..." />
+  
+  <meta property="og:image" content="http://debug.ninja/assets/images/debug_ninja2.png" />
+  <meta property="og:url" content="http://debug.ninja/2009/04/04/Amazon-SimpleDB-As-Object-Persistence-Data-Store/" >
+  <meta property="og:type" content="blog" />
+  <meta property="article:published_time" content="2009-04-04T06:21:00-04:00">
+
+  <link rel="canonical" href="http://debug.ninja/2009/04/04/Amazon-SimpleDB-As-Object-Persistence-Data-Store/">
+
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+  <link rel="stylesheet" href="http://brick.a.ssl.fastly.net/Linux+Libertine:400,400i,700,700i/Open+Sans:400,400i,700,700i">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="/css/print.css" />
+</head>
+
+  <body itemscope itemtype="http://schema.org/Article">
+    <!-- header start -->
+
+<a href="http://debug.ninja" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/debug_ninja2.png)"></span></a>
+
+<!-- header end -->
+
+    <main class="content" role="main">
+      <article class="post">
+        
+        <div class="noarticleimage">
+          <div class="post-meta">
+            <h1 class="post-title">Using Amazon SimpleDB as an Object Persistence Data Store</h1>
+            <div class="cf post-meta-text">
+              <div class="author-image" style="background-image: url(/assets/images/author2.jpg)">Blog Logo</div>
+              <h4 class="author-name" itemprop="author" itemscope itemtype="http://schema.org/Person"></h4>
+              on
+              <time datetime="2009-04-04T06:21:00-04:00">04 Apr 2009</time>
+              <!-- , tagged on <span class="post-tag-">, <a href="/tag/"></a></span> -->
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        
+        <section class="post-content">
+          <div class="post-reading">
+            <span class="post-reading-time"></span> read
+          </div>
+          <a name="topofpage"></a>
+          <p>I hate relational databases!  In a high traffic scenario they become painful to scale.  Data segmentation, replication, asynchronous updates…you can only go so far.  Schema changes alone require site outages and careful planning.  That is why I was excited when Amazon announced their <a href="http://www.satine.org/archives/2007/12/13/amazon-simpledb/">SimpleDB service</a>.</p>
+
+<h4>Features</h4>
+
+<ul>
+<li>High Availability</li>
+<li>Scales with you</li>
+<li>No need to worry about schema</li>
+<li>Has a free tier for low traffic uses</li>
+</ul>
+
+<p>I am working on two social networking sites (<a href="http://www.tool-assisted.com">tool-assisted</a>, <a href="http://beerpassport.com">beerpassport</a>) that I plan to use SDB for.  The basic idea is to have several cheap web servers talking to a pool of memcached instances that act as a caching mechanism for my object graph which is stored in SDB.  The first step towards implementing this solution is to come up with a way to persist objects into the SDB.</p>
+
+<h4>Object to be persisted</h4>
+
+<p>First lets look at the object I want to save to the database.  I want as little actual db code in this object as possible.</p>
+
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Linq</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Text</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">ToolAssistedCom.Models</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Amazon.SimpleDB.ORM</span><span class="p">;</span>
+
+<span class="k">namespace</span> <span class="nn">ToolAssistedCom.Models</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">Platform</span>
+    <span class="p">{</span>
+        <span class="k">public</span> <span class="kt">string</span> <span class="n">Description</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+        <span class="k">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;</span> <span class="n">Manufacturers</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+        <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+        <span class="k">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;</span> <span class="n">OnlineServices</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+        <span class="k">public</span> <span class="kt">string</span> <span class="n">Predecessor</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+        <span class="k">public</span> <span class="kt">string</span> <span class="n">Successor</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="na">        [SDB(IsKey = true)]</span> <span class="k">public</span> <span class="kt">string</span> <span class="n">UID</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+        <span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// Default constructor</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="k">public</span> <span class="nf">Platform</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="n">Description</span> <span class="p">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+            <span class="n">UID</span> <span class="p">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+            <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+            <span class="n">Manufacturers</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;();</span>
+            <span class="n">Predecessor</span> <span class="p">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+            <span class="n">Successor</span> <span class="p">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+            <span class="n">OnlineServices</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;();</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<h4>Base Class</h4>
+
+<p>Now I am going to define my base class.  I want this class to be generic enough to load any object from the database.  I have defined two methods called LoadOne and LoadMany which will be used to do this.  I have not implemented a save mechanism yet.</p>
+
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Linq</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Text</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Amazon.SimpleDB</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Amazon.SimpleDB.Model</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Reflection</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Attribute</span> <span class="p">=</span> <span class="n">Amazon</span><span class="p">.</span><span class="n">SimpleDB</span><span class="p">.</span><span class="n">Model</span><span class="p">.</span><span class="n">Attribute</span><span class="p">;</span>
+
+<span class="k">namespace</span> <span class="nn">Amazon.SimpleDB.ORM</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">abstract</span> <span class="k">class</span> <span class="nc">SimpleDBObject</span>
+    <span class="p">{</span>
+        <span class="k">protected</span> <span class="kt">string</span> <span class="n">_domainName</span> <span class="p">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+        <span class="k">protected</span> <span class="kt">string</span> <span class="n">_columns</span> <span class="p">=</span> <span class="s">&quot;*&quot;</span><span class="p">;</span>
+        <span class="k">protected</span> <span class="kt">string</span> <span class="n">_sort</span> <span class="p">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+        <span class="k">protected</span> <span class="kt">string</span> <span class="n">_accessKeyId</span> <span class="p">=</span> <span class="s">&quot;YOURKEY&quot;</span><span class="p">;</span>
+        <span class="k">protected</span> <span class="kt">string</span> <span class="n">_secretAccessKey</span> <span class="p">=</span> <span class="s">&quot;SECRETKEY&quot;</span><span class="p">;</span>
+        <span class="k">protected</span> <span class="n">AmazonSimpleDB</span> <span class="n">_service</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
+        <span class="k">protected</span> <span class="n">SelectRequest</span> <span class="n">_request</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
+        <span class="k">protected</span> <span class="kt">object</span> <span class="n">_prototype</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
+
+        <span class="k">protected</span> <span class="k">void</span> <span class="nf">SetupClient</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="n">_service</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AmazonSimpleDBClient</span><span class="p">(</span><span class="n">_accessKeyId</span><span class="p">,</span> <span class="n">_secretAccessKey</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">protected</span> <span class="k">void</span> <span class="nf">CreateNewSelectRequest</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="n">_service</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AmazonSimpleDBClient</span><span class="p">(</span><span class="n">_accessKeyId</span><span class="p">,</span> <span class="n">_secretAccessKey</span><span class="p">);</span>
+            <span class="n">_request</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SelectRequest</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="k">protected</span> <span class="k">void</span> <span class="nf">SetValueFromResponse</span><span class="p">(</span><span class="k">ref</span> <span class="kt">object</span> <span class="n">myobj</span><span class="p">,</span> <span class="kt">string</span> <span class="n">name</span><span class="p">,</span> <span class="kt">string</span> <span class="k">value</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="c1">// Include the type of the object</span>
+            <span class="n">System</span><span class="p">.</span><span class="n">Type</span> <span class="n">type</span> <span class="p">=</span> <span class="n">myobj</span><span class="p">.</span><span class="n">GetType</span><span class="p">();</span>
+
+
+            <span class="c1">// Walk the properties on this object</span>
+            <span class="n">System</span><span class="p">.</span><span class="n">Reflection</span><span class="p">.</span><span class="n">PropertyInfo</span><span class="p">[]</span> <span class="n">pi</span> <span class="p">=</span> <span class="n">type</span><span class="p">.</span><span class="n">GetProperties</span><span class="p">();</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">pi</span><span class="p">.</span><span class="n">Length</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">foreach</span> <span class="p">(</span><span class="n">PropertyInfo</span> <span class="n">p</span> <span class="k">in</span> <span class="n">pi</span><span class="p">)</span>
+                <span class="p">{</span>
+
+                    <span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">CanRead</span> <span class="p">&amp;&amp;</span> <span class="n">p</span><span class="p">.</span><span class="n">CanWrite</span> <span class="p">&amp;&amp;</span> <span class="n">p</span><span class="p">.</span><span class="n">Name</span><span class="p">.</span><span class="n">ToLower</span><span class="p">()</span> <span class="p">==</span> <span class="n">name</span><span class="p">.</span><span class="n">ToLower</span><span class="p">())</span>
+                    <span class="p">{</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">PropertyType</span> <span class="p">==</span> <span class="k">typeof</span><span class="p">(</span><span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;))</span>
+                        <span class="p">{</span>
+                            <span class="p">((</span><span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;)</span><span class="n">p</span><span class="p">.</span><span class="n">GetValue</span><span class="p">(</span><span class="n">myobj</span><span class="p">,</span> <span class="k">null</span><span class="p">)).</span><span class="n">Add</span><span class="p">(</span><span class="k">value</span><span class="p">);</span>
+                        <span class="p">}</span>
+                        <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">PropertyType</span> <span class="p">==</span> <span class="k">typeof</span><span class="p">(</span><span class="kt">string</span><span class="p">))</span>
+                        <span class="p">{</span>
+                            <span class="n">p</span><span class="p">.</span><span class="n">SetValue</span><span class="p">(</span><span class="n">myobj</span><span class="p">,</span> <span class="k">value</span><span class="p">,</span> <span class="k">null</span><span class="p">);</span>
+                        <span class="p">}</span>
+                        <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">PropertyType</span> <span class="p">==</span> <span class="k">typeof</span><span class="p">(</span><span class="kt">int</span><span class="p">))</span>
+                        <span class="p">{</span>
+                            <span class="n">p</span><span class="p">.</span><span class="n">SetValue</span><span class="p">(</span><span class="n">myobj</span><span class="p">,</span> <span class="kt">int</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="k">value</span><span class="p">),</span> <span class="k">null</span><span class="p">);</span>
+                        <span class="p">}</span>
+
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span><span class="c1">//send SetValueFromResponse</span>
+
+        <span class="k">protected</span> <span class="k">void</span> <span class="nf">LoadOneFromDB</span><span class="p">(</span><span class="kt">string</span> <span class="n">id</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">SetupClient</span><span class="p">();</span>
+            <span class="n">CreateNewSelectRequest</span><span class="p">();</span>
+            <span class="n">_request</span><span class="p">.</span><span class="n">SelectExpression</span> <span class="p">=</span> <span class="s">&quot;select &quot;</span> <span class="p">+</span> <span class="n">_columns</span> <span class="p">+</span> <span class="s">&quot; from &quot;</span> <span class="p">+</span> <span class="n">_domainName</span> <span class="p">+</span> <span class="s">&quot; where UID = &#39;&quot;</span> <span class="p">+</span> <span class="n">id</span> <span class="p">+</span> <span class="s">&quot;&#39;&quot;</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(!</span><span class="kt">string</span><span class="p">.</span><span class="n">IsNullOrEmpty</span><span class="p">(</span><span class="n">_sort</span><span class="p">))</span>
+            <span class="p">{</span>
+                <span class="n">_request</span><span class="p">.</span><span class="n">SelectExpression</span> <span class="p">+=</span> <span class="s">&quot; order by &quot;</span> <span class="p">+</span> <span class="n">_sort</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">SelectResponse</span> <span class="n">response</span> <span class="p">=</span> <span class="n">_service</span><span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">_request</span><span class="p">);</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">IsSetSelectResult</span><span class="p">())</span>
+            <span class="p">{</span>
+                <span class="n">SelectResult</span> <span class="n">result</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">SelectResult</span><span class="p">;</span>
+                <span class="n">List</span><span class="p">&lt;</span><span class="n">Item</span><span class="p">&gt;</span> <span class="n">itemList</span> <span class="p">=</span> <span class="n">result</span><span class="p">.</span><span class="n">Item</span><span class="p">;</span>
+                <span class="k">foreach</span> <span class="p">(</span><span class="n">Item</span> <span class="n">item</span> <span class="k">in</span> <span class="n">itemList</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">IsSetName</span><span class="p">())</span>
+                    <span class="p">{</span>
+                    <span class="p">}</span>
+                    <span class="n">List</span><span class="p">&lt;</span><span class="n">Attribute</span><span class="p">&gt;</span> <span class="n">attributeList</span> <span class="p">=</span> <span class="n">item</span><span class="p">.</span><span class="n">Attribute</span><span class="p">;</span>
+                    <span class="k">foreach</span> <span class="p">(</span><span class="n">Attribute</span> <span class="n">attribute</span> <span class="k">in</span> <span class="n">attributeList</span><span class="p">)</span>
+                    <span class="p">{</span>
+
+                        <span class="k">if</span> <span class="p">(</span><span class="n">attribute</span><span class="p">.</span><span class="n">IsSetName</span><span class="p">()</span> <span class="p">&amp;&amp;</span> <span class="n">attribute</span><span class="p">.</span><span class="n">IsSetValue</span><span class="p">())</span>
+                        <span class="p">{</span>
+                            <span class="n">SetValueFromResponse</span><span class="p">(</span><span class="k">ref</span> <span class="n">_prototype</span><span class="p">,</span> <span class="n">attribute</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span> <span class="n">attribute</span><span class="p">.</span><span class="n">Value</span><span class="p">);</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span><span class="c1">//end foreach attribute</span>
+                <span class="p">}</span><span class="c1">//end for each item</span>
+            <span class="p">}</span><span class="c1">//if issetseltresult</span>
+            <span class="k">else</span>
+            <span class="p">{</span>
+                <span class="k">throw</span> <span class="k">new</span> <span class="nf">Exception</span><span class="p">(</span><span class="s">&quot;WTF M8&quot;</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="k">protected</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Object</span><span class="p">&gt;</span> <span class="n">LoadManyFromDB</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="n">List</span><span class="p">&lt;</span><span class="kt">object</span><span class="p">&gt;</span> <span class="n">myList</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">object</span><span class="p">&gt;();</span>
+            <span class="n">SetupClient</span><span class="p">();</span>
+            <span class="n">CreateNewSelectRequest</span><span class="p">();</span>
+            <span class="n">_request</span><span class="p">.</span><span class="n">SelectExpression</span> <span class="p">=</span> <span class="s">&quot;select &quot;</span> <span class="p">+</span> <span class="n">_columns</span> <span class="p">+</span> <span class="s">&quot; from &quot;</span> <span class="p">+</span> <span class="n">_domainName</span><span class="p">;</span>
+
+            <span class="k">if</span> <span class="p">(!</span><span class="kt">string</span><span class="p">.</span><span class="n">IsNullOrEmpty</span><span class="p">(</span><span class="n">_sort</span><span class="p">))</span>
+            <span class="p">{</span>
+                <span class="n">_request</span><span class="p">.</span><span class="n">SelectExpression</span> <span class="p">+=</span> <span class="s">&quot; order by &quot;</span> <span class="p">+</span> <span class="n">_sort</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">SelectResponse</span> <span class="n">response</span> <span class="p">=</span> <span class="n">_service</span><span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">_request</span><span class="p">);</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">IsSetSelectResult</span><span class="p">())</span>
+            <span class="p">{</span>
+                <span class="n">SelectResult</span> <span class="n">result</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">SelectResult</span><span class="p">;</span>
+                <span class="n">List</span><span class="p">&lt;</span><span class="n">Item</span><span class="p">&gt;</span> <span class="n">itemList</span> <span class="p">=</span> <span class="n">result</span><span class="p">.</span><span class="n">Item</span><span class="p">;</span>
+                <span class="k">foreach</span> <span class="p">(</span><span class="n">Item</span> <span class="n">item</span> <span class="k">in</span> <span class="n">itemList</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">IsSetName</span><span class="p">())</span>
+                    <span class="p">{</span>
+                    <span class="p">}</span>
+                    <span class="kt">object</span> <span class="n">myobj</span> <span class="p">=</span> <span class="n">System</span><span class="p">.</span><span class="n">Activator</span><span class="p">.</span><span class="n">CreateInstance</span><span class="p">(</span><span class="n">_prototype</span><span class="p">.</span><span class="n">GetType</span><span class="p">());</span>
+
+                    <span class="n">List</span><span class="p">&lt;</span><span class="n">Attribute</span><span class="p">&gt;</span> <span class="n">attributeList</span> <span class="p">=</span> <span class="n">item</span><span class="p">.</span><span class="n">Attribute</span><span class="p">;</span>
+                    <span class="k">foreach</span> <span class="p">(</span><span class="n">Attribute</span> <span class="n">attribute</span> <span class="k">in</span> <span class="n">attributeList</span><span class="p">)</span>
+                    <span class="p">{</span>
+
+                        <span class="k">if</span> <span class="p">(</span><span class="n">attribute</span><span class="p">.</span><span class="n">IsSetName</span><span class="p">()</span> <span class="p">&amp;&amp;</span> <span class="n">attribute</span><span class="p">.</span><span class="n">IsSetValue</span><span class="p">())</span>
+                        <span class="p">{</span>
+                            <span class="n">SetValueFromResponse</span><span class="p">(</span><span class="k">ref</span> <span class="n">myobj</span><span class="p">,</span> <span class="n">attribute</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span> <span class="n">attribute</span><span class="p">.</span><span class="n">Value</span><span class="p">);</span>   
+                        <span class="p">}</span>
+                    <span class="p">}</span><span class="c1">//end foreach attribute</span>
+                    <span class="n">myList</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">myobj</span><span class="p">);</span>
+                <span class="p">}</span><span class="c1">//end for each item</span>
+            <span class="p">}</span><span class="c1">//if issetseltresult</span>
+            <span class="k">else</span>
+            <span class="p">{</span>
+                <span class="k">throw</span> <span class="k">new</span> <span class="nf">Exception</span><span class="p">(</span><span class="s">&quot;WTF M8&quot;</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="n">myList</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<h4>Glue Code</h4>
+
+<p>Finally here is the code that glues it together.</p>
+
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Linq</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Text</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Amazon.SimpleDB.ORM</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Reflection</span><span class="p">;</span>
+
+<span class="k">namespace</span> <span class="nn">ToolAssistedCom.Models</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">SDBPlatform</span> <span class="p">:</span> <span class="n">SimpleDBObject</span><span class="p">,</span> <span class="n">IPlatformRepository</span>
+    <span class="p">{</span>
+        <span class="k">public</span> <span class="nf">SDBPlatform</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="n">_domainName</span> <span class="p">=</span> <span class="s">&quot;Platform&quot;</span><span class="p">;</span>
+            <span class="n">_prototype</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Platform</span><span class="p">();</span>
+
+        <span class="p">}</span>
+
+        <span class="k">public</span> <span class="n">Platform</span> <span class="nf">GetByUID</span><span class="p">(</span><span class="kt">string</span> <span class="n">id</span><span class="p">){</span>
+            <span class="n">LoadOneFromDB</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+            <span class="k">return</span> <span class="p">((</span><span class="n">Platform</span><span class="p">)</span><span class="n">_prototype</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">Platform</span> <span class="n">entity</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">NotImplementedException</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">public</span> <span class="k">void</span> <span class="nf">Remove</span><span class="p">(</span><span class="n">Platform</span> <span class="n">entity</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">NotImplementedException</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="k">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Platform</span><span class="p">&gt;</span> <span class="n">GetPlatforms</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="n">List</span><span class="p">&lt;</span><span class="n">Platform</span><span class="p">&gt;</span> <span class="n">temp</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Platform</span><span class="p">&gt;();</span>
+            <span class="k">foreach</span> <span class="p">(</span><span class="n">Platform</span> <span class="n">item</span> <span class="k">in</span> <span class="n">LoadManyFromDB</span><span class="p">())</span>
+            <span class="p">{</span>
+                <span class="n">temp</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="n">temp</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">public</span> <span class="k">void</span> <span class="nf">Save</span><span class="p">(</span><span class="n">Platform</span> <span class="n">entity</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">NotImplementedException</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+<span class="p">}</span></code></pre></div>
+
+<p>I will release more details as I finish writing the code. Once the code is in a pretty good state I will throw it up on codeplex incase anyone else wants to use it (or improve it).</p>
+
+        </section>
+        <footer class="post-footer">
+          <section class="share">
+            
+              
+                <a class="icon-twitter" href="http://twitter.com/share?text=Using+Amazon+SimpleDB+as+an+Object+Persistence+Data+Store&amp;url=http://debug.ninja/2009/04/04/Amazon-SimpleDB-As-Object-Persistence-Data-Store"
+                  onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+                <i class="fa fa-twitter"></i><span class="hidden">twitter</span>
+                </a>
+              
+            
+              
+            
+              
+            
+              
+            
+          </section>
+        </footer>
+        <div class="bottom-teaser cf">
+          <div class="isLeft">
+            <h5 class="index-headline featured"><span>Written by</span></h5>
+            <section class="author">
+              <div class="author-image" style="background-image: url(/assets/images/author2.jpg)">Blog Logo</div>
+              <h4>Jeffery Yeary</h4>
+              <p class="bio"></p>
+              <hr>
+              <p class="published">Published <time datetime="2009-04-04 06:21">04 Apr 2009</time></p>
+            </section>
+          </div>
+          
+          <div class="isRight">
+            <h5 class="index-headline featured"><span>Supported by</span></h5>
+            <footer class="site-footer">
+              <section class="poweredby">Proudly published with <a href="http://jekyllrb.com"> Jekyll</a></section>
+              <a class="subscribe" href="/feed.xml"> <span class="tooltip"> <i class="fa fa-rss"></i> You should subscribe to my feed.</span></a>
+              <div class="inner">
+                <section class="copyright">All content copyright <a href="mailto:blog@debug.ninja">Jeffery Yeary</a> &copy; 2015<br>All rights reserved.</section>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </article>
+    </main>
+    <div class="bottom-closer">
+      <div class="background-closer-image"  style="background-image: url(/assets/images/cover1.jpg)">
+        Image
+      </div>
+      <div class="inner">
+        <h1 class="blog-title">Debug Ninja</h1>
+        <h2 class="blog-description">This is the portfolio / blog / space on the internet of Jeffery Yeary, a software architect with a passion for music, coding, fitness and art.</h2>
+        <a href="/" class="btn">Back to Overview</a>
+        <a href="/tags/" class="btn">All Posts</a>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/assets/js/index.js"></script>
+<script type="text/javascript" src="/assets/js/readingTime.min.js"></script>
+<script>
+(function ($) {
+  "use strict";
+  $(document).ready(function(){
+
+    var $window = $(window),
+    $image = $('.post-image-image, .teaserimage-image');
+    
+      $window.on('scroll', function() {
+        var top = $window.scrollTop();
+
+        if (top < 0 || top > 1500) { return; }
+        $image
+          .css('transform', 'translate3d(0px, '+top/3+'px, 0px)')
+          .css('opacity', 1-Math.max(top/700, 0));
+      });
+      $window.trigger('scroll');
+
+      var height = $('.article-image').height();
+      $('.post-content').css('padding-top', height + 'px');
+
+      $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+         && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            $('html,body').animate({ scrollTop: target.offset().top }, 500);
+            return false;
+          }
+        }
+      });
+
+  });
+}(jQuery));
+</script>
+
+
+  </body>
+</html>
