@@ -1,0 +1,72 @@
+# Build settings
+markdown: redcarpet
+highlighter: pygments
+permalink: pretty
+gems:
+  - jemoji
+
+# Site settings
+title: 'Debug Ninja'
+description: 'This is the portfolio / blog / space on the internet of Jeffery Yeary, a software architect with a passion for music, coding, fitness and art.'
+email: 'blog@debug.ninja'
+#blog logo
+logo: "/assets/images/debug_ninja2.png"
+# blog cover
+cover: "/assets/images/cover1.jpg"
+
+name: 'Jeffery Yeary'
+author: 'Jeffery Yeary'
+author_image: "/assets/images/author2.jpg"
+
+paginate:	5
+
+url: 'http://debug.ninja' # the base hostname & protocol for your site
+baseurl: ""
+twitter_handle: '@usbsnowcrash'
+
+# social icons and sharing options
+social:
+  - icon:	twitter
+    url:	https://twitter.com/usbsnowcrash
+    desc: Follow me on twitter
+    share_url: http://twitter.com/share
+    share_title: ?text=
+    share_link: "&amp;url="
+
+  - icon:	linkedin
+    url:	https://www.linkedin.com/in/jefferyyeary
+    desc:	View my resume on linked in
+    share_url:
+    share_title:
+    share_link:
+
+  - icon:	info
+    url:	http://vizualize.me/debug-ninja?r=debug-ninja
+    desc:	Infographic describing my work history
+    share_url:
+    share_title:
+    share_link:
+
+  - icon:	github
+    url:	https://github.com/usbsnowcrash
+    desc:	Fork me on github
+    share_url:
+    share_title:
+    share_link:
+
+
+#Superfeed settings
+blog_feed_limit: 5
+superfeed_days_back: 14
+
+last_fm_username: 'usbsnowcrash'
+last_fm_limit: 3
+last_fm_icon: ''
+
+instagram_id: '54558149'
+instagram_username: 'usbsnowcrash'
+instagram_limit: 3
+instagram_icon: ''
+
+github_username: 'usbsnowcrash'
+github_limit: 5

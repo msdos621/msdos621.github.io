@@ -1,0 +1,41 @@
+---
+layout: page
+title: URL Encoder / Decoder Online Tool
+group: tools
+---
+<p>
+Input any string of text and press encode or decode in order to url encode / decode the text.
+</p>
+<form>
+	<div class="row">
+		<div class="large-12 columns">
+		  <label>Text to encode / decode
+		    <textarea id="decode_box" rows="5"></textarea>
+		  </label>
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-12 large-6 columns">
+			<a href="#" id="encode" class="button expand">Encode</a>
+		</div>
+		<div class="small-12 large-6 columns">
+			<a href="#" id="decode" class="button expand">Decode</a>
+		</div>
+	</div>
+</form>
+<p>
+Here is the code used to do this
+</p>
+{% highlight javascript %}
+{% raw %}
+$(document).ready(function () {
+ 	$('#encode').click(function() {
+  		$('#decode_box').val(encodeURIComponent($('#decode_box').val()));
+	});
+
+	$('#decode').click(function() {
+  		$('#decode_box').val(decodeURIComponent($('#decode_box').val()));
+	});
+ });
+{% endraw %}
+{% endhighlight %}
