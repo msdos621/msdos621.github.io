@@ -6,3 +6,5 @@ Thumbs.db
 .env
 .idea/*
 Gemfile.lock
+.sass-cache/*
+.jekyll-metadata
