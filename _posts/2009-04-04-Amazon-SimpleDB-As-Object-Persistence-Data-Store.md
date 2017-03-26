@@ -4,7 +4,7 @@ title:  Using Amazon SimpleDB as an Object Persistence Data Store
 date:   2009-04-04 10:21:00
 tags:
 - aws
-- c#
+- c sharp
 - code
 ---
 

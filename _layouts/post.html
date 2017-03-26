@@ -19,7 +19,14 @@
               <h4 class="author-name" itemprop="author" itemscope itemtype="http://schema.org/Person">{{ site.author }}</h4>
               on
               <time datetime="{{ page.date | date: "%F %R" }}">{{ page.date | date_to_string }}</time>
-              <!-- , tagged on {{#foreach tags}}<span class="post-tag-{{slug}}">{{#if @first}}{{else}}, {{/if}}<a href="/tag/{{slug}}">{{name}}</a></span>{{/foreach}} -->
+              {% if page.tags %}
+                <span class="post-tags-set"> under: 
+                {% for tag in page.tags %}
+                    <span class="post-tag-{{tag}}"><a href="/tags/{{ tag | slugify }}">{{ tag }}</a></span>
+                    {% unless forloop.last %},&nbsp;&nbsp;{% endunless %}
+                {% endfor %}
+                </span>
+              {% endif %}
             </div>
             <div style="text-align:center">
               <a href="#topofpage" class="topofpage"><i class="fa fa-angle-down"></i></a>
@@ -35,7 +42,14 @@
               <h4 class="author-name" itemprop="author" itemscope itemtype="http://schema.org/Person">{{ page.author }}</h4>
               on
               <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date_to_string }}</time>
-              <!-- , tagged on {{#foreach tags}}<span class="post-tag-{{slug}}">{{#if @first}}{{else}}, {{/if}}<a href="/tag/{{slug}}">{{name}}</a></span>{{/foreach}} -->
+              {% if page.tags %}
+                <span class="post-tags-set"> under: 
+                {% for tag in page.tags %}
+                    <span class="post-tag-{{tag}}"><a href="/tags/{{ tag | slugify }}">{{ tag }}</a></span>
+                    {% unless forloop.last %},&nbsp;&nbsp;{% endunless %}
+                {% endfor %}
+                </span>
+            {% endif %}
             </div>
           </div>
         </div>
@@ -66,14 +80,14 @@
           <div class="isLeft">
             <h5 class="index-headline featured"><span>Written by</span></h5>
             <section class="author">
-              <div class="author-image" style="background-image: url({{site.author_image}})">Blog Logo</div>
+              <div class="author-image" style="background-image: url({{ site.author_image }})">Blog Logo</div>
               <h4>{{ site.author }}</h4>
-              <p class="bio">{{author.bio}}</p>
+              <p class="bio">{{ author.bio }}</p>
               <hr>
               <p class="published">Published <time datetime="{{ page.date | date: "%F %R" }}">{{ page.date | date_to_string }}</time></p>
             </section>
           </div>
-          {{/post}}
+
           <div class="isRight">
             <h5 class="index-headline featured"><span>Supported by</span></h5>
             <footer class="site-footer">
