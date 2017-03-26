@@ -4,7 +4,7 @@ title: New module for superfeed
 date: '2013-07-13T16:24:24-04:00'
 image: /assets/article_images/2013-10-02-20.01.50.jpg
 tags:
-- c#
+- c sharp
 - code
 tumblr_url: http://psychicdebugging.tumblr.com/post/55363919097/new-module-for-superfeed
 ---

@@ -1,0 +1,29 @@
+---
+layout: page
+---
+<h4>Posts related to: {{ page.title }}</h4>
+
+
+{% for post in site.tags[page.tag]  %}
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+      <div class="article-item">
+          <header class="post-header">
+              <h2 class="post-title" itemprop="name"><a href="{{ post.url }}" itemprop="url">{{ post.title }}</a></h2>
+          </header>
+          <section class="post-excerpt" itemprop="description">
+              <p>{{ post.content | strip_html | truncatewords: 50 }}</p>
+          </section>
+          <div class="post-meta">
+              <time datetime="{{ post.date | date_to_long_string }}">{{ post.date | date_to_long_string }}</time>
+              {% if post.tags %}
+                  <span class="post-tags-set"> under: 
+                  {% for tag in post.tags %}
+                      <span class="post-tag-{{tag}}"><a href="/tags/{{tag}}">{{ tag | slugify }}</a></span>
+                      {% unless forloop.last %},&nbsp;&nbsp;{% endunless %}
+                  {% endfor %}
+                  </span>
+              {% endif %}
+          </div>
+      </div>
+  </article>
+{% endfor %}
