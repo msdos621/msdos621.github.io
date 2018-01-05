@@ -28,14 +28,16 @@ Here is the code used to do this
 </p>
 {% highlight javascript %}
 {% raw %}
-$(document).ready(function () {
- 	$('#encode').click(function() {
-  		$('#decode_box').val(encodeURIComponent($('#decode_box').val()));
-	});
-
-	$('#decode').click(function() {
-  		$('#decode_box').val(decodeURIComponent($('#decode_box').val()));
-	});
- });
+document.addEventListener('DOMContentLoaded', function() {
+	document.getElementById('encode').addEventListener('click', function(el) {
+    var input = document.getElementById('decode_box').value;
+    document.getElementById('decode_box').value = window.encodeURIComponent(input);
+  });
+  document.getElementById('decode').addEventListener('click', function(el) {
+    var input = document.getElementById('decode_box').value;
+    document.getElementById('decode_box').value = window.decodeURIComponent(input);
+  });
+});
 {% endraw %}
 {% endhighlight %}
+<script src="/assets/js/url_encode_decode.js" />
