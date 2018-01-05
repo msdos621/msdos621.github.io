@@ -741,6 +741,44 @@ DebugNinja.knowSerials['E9452RYA0012LL/A'] = 'EDUARDO L.';
 DebugNinja.knowSerials['NE6380TSA2S6000'] = 'EBAY';
 DebugNinja.knowSerials['NE63700WA2S6000'] = 'GARRETT M.';
 
+DebugNinja.lookupTable = {};
+DebugNinja.lookupTable['0'] =	0;
+DebugNinja.lookupTable['1'] =	1;
+DebugNinja.lookupTable['2'] =	2;
+DebugNinja.lookupTable['3'] =	3;
+DebugNinja.lookupTable['4'] =	4;
+DebugNinja.lookupTable['5'] =	5;
+DebugNinja.lookupTable['6'] =	6;
+DebugNinja.lookupTable['7'] =	7;
+DebugNinja.lookupTable['8'] =	8;
+DebugNinja.lookupTable['9'] =	9;
+DebugNinja.lookupTable['A'] =	10;
+DebugNinja.lookupTable['B'] =	11;
+DebugNinja.lookupTable['C'] =	12;
+DebugNinja.lookupTable['D'] =	13;
+DebugNinja.lookupTable['E'] =	14;
+DebugNinja.lookupTable['F'] =	15;
+DebugNinja.lookupTable['G'] =	16;
+DebugNinja.lookupTable['H'] =	17;
+DebugNinja.lookupTable['I'] =	1;
+DebugNinja.lookupTable['J'] =	18;
+DebugNinja.lookupTable['K'] =	19;
+DebugNinja.lookupTable['L'] =	20;
+DebugNinja.lookupTable['M'] =	21;
+DebugNinja.lookupTable['N'] =	22;
+DebugNinja.lookupTable['O'] =	0;
+DebugNinja.lookupTable['P'] =	23;
+DebugNinja.lookupTable['Q'] =	24;
+DebugNinja.lookupTable['R'] =	25;
+DebugNinja.lookupTable['S'] =	26;
+DebugNinja.lookupTable['T'] =	27;
+DebugNinja.lookupTable['U'] =	28;
+DebugNinja.lookupTable['V'] =	29;
+DebugNinja.lookupTable['W'] =	30;
+DebugNinja.lookupTable['X'] =	31;
+DebugNinja.lookupTable['Y'] =	32;
+DebugNinja.lookupTable['Z'] =	33;
+
 DebugNinja.Apple2GS = function(input) {
   // defaults
   this.serial = input;
@@ -783,6 +821,11 @@ DebugNinja.Apple2GS = function(input) {
     return;
   }
   input = input.slice(2);
+  if(input.length >= 3){
+    this.unit = DebugNinja.lookupTable[input.charAt(0)]*(34*34) + DebugNinja.lookupTable[input.charAt(1)]*(34) + DebugNinja.lookupTable[input.charAt(2)]*(1); 
+  } else {
+    alert('Your unit number looks whack');
+  }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -795,7 +838,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('year').value = myApple.yearOfProduction;
     document.getElementById('week').value = myApple.weekOfProduction;
     document.getElementById('owner').value = myApple.owner;
-    document.getElementById('unit').value = myApple.owner;
+    document.getElementById('unit').value = myApple.unit;
 
     document.getElementById('results').setAttribute('style', '');
   });
