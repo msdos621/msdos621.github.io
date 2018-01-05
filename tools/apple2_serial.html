@@ -1,0 +1,32 @@
+---
+layout: page
+title: Apple 2 GS Serial Decoder
+group: tools
+---
+<p>
+	<img src="/assets/article_images/2gs1.jpg"><br>
+	Enter an apple 2 serial number (e.g. E749YJAA2S6000)<br />
+	<form>
+		<p>
+		<label>Serial #
+			<input id="decode_box" type="text" maxlength="16"></input>
+		</label>
+		<input type="button" id="encode" value="Decode Serial Number"></input>
+		</p>
+		<p id="results" style="display: none;">
+			<label>Factory
+				<input id="factory" type="text" readonly></input>
+			</label><br>
+			<label>Year
+				<input id="year" type="text" readonly></input>
+			</label><br>
+			<label>Week
+				<input id="week" type="text" readonly></input>
+			</label><br>
+			<label>Last known owner
+				<input id="owner" type="text" readonly></input>
+			</label>
+		</p>
+	</form>
+</p>
+<script src="/assets/js/apple2.js" />
