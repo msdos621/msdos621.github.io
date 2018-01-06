@@ -13,11 +13,11 @@ tags:
 I recently left my job at CareerBuilder and I wanted to make sure I stay in peak interviewing shape.  To that end I have decided to join the [100 days of code](https://medium.freecodecamp.org/join-the-100daysofcode-556ddb4579e4) challenge.
 
 #### First project
-Monday I dusted off my childhood computer and I have been having a blast playing with it.  The apple 2gs is really a missed opportunity.  It would have been amazing to see the continuation of this line.  It is a stock (currently) apple 2gs.  After hanging around the Apple II gs enthusiast [Facebook group](https://www.facebook.com/groups/AppleIIGSEnthusiasts/) I realized there was a need for a serial number decoding tool.  There is a great native Mac OS app for doing this but nothing for windows / mobile / other platforms. 
+Monday I dusted off my childhood computer and I have been having a blast playing with it.  The apple 2gs is really a missed opportunity for apple and it would have been amazing to see the continuation of this line.  After hanging around the [Apple II gs enthusiast Facebook group](https://www.facebook.com/groups/AppleIIGSEnthusiasts/) I realized there was a need for a [serial number decoding tool](/tools/apple2_serial/).  There is a great native Mac OS app for doing this but nothing for windows / mobile / other platforms. 
 
 #### How the serial numbers work
-Given my serial number *E9378TTA0012LL/A* you can read it like this
-E-9-37-8TT-The rest of it.  
+You can discern quite a bit form the serial numbers found on old apple computers.  For example, given my serial number *E9378TTA0012LL/A* you can read it like this:
+E-9-37-8TT-Model Number
 * E - Factory code (E=Singapore, NE=Singapore, CK=Cork Ireland, C=Cork?)
 * 9 - Year of production (7=1987, 8=1988, 9=1989, 0=1990, 1=1991...)
 * 37 - Week of production
