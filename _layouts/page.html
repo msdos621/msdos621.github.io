@@ -1,11 +1,11 @@
 ---
 ---
 <!DOCTYPE html>
-<html>
+<html lang="en">
   {% include head.html %}
   <body itemscope itemtype="http://schema.org/Article">
     {% include header.html %}
-    <main class="content" role="main">
+    <main class="content">
       <article class="post">
         {% if page.image %}
         <div class="article-image">
@@ -19,7 +19,7 @@
               <h4 class="author-name" itemprop="author" itemscope itemtype="http://schema.org/Person">{{ site.author }}</h4>
             </div>
             <div style="text-align:center">
-              <a href="#topofpage" class="topofpage"><i class="fa fa-angle-down"></i></a>
+              <a href="#top-of-page" class="topofpage"><i class="fa fa-angle-down"></i></a>
             </div>
           </div>
         </div>
@@ -37,8 +37,7 @@
         <br>
         <br>
         {% endif %}
-        <section class="post-content">
-          <a name="topofpage"></a>
+        <section class="post-content" id="top-of-page">
           {{content}}
         </section>
       </article>
