@@ -4,7 +4,8 @@ title: All Posts by Tags
 header: Posts By Tag
 group: navigation
 ---
-{% for tag in site.tags %}
+{% assign sortedtags = site.tags | sort %}
+{% for tag in sortedtags %}
   <h4 id="{{ tag[0] }}-ref">{{ tag[0] }}</h4>
   <ul>
     {% assign pages_list = tag[1] %}
