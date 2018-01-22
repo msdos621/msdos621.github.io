@@ -2,7 +2,7 @@
 highlighter: rouge
 permalink: pretty
 markdown: kramdown
-gems:
+plugins:
   - jekyll-feed
   - jemoji
   - jekyll-paginate
@@ -15,7 +15,7 @@ github_username: 'usbsnowcrash'
 paginate: 5
 title: 'Debug Ninja'
 twitter_handle: '@usbsnowcrash'
-url: 'http://debug.ninja' # the base hostname & protocol for your site
+url: 'https://debug.ninja' # the base hostname & protocol for your site
 
 # Blog logo
 logo: "/assets/images/debug_ninja2.png"
