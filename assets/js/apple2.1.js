@@ -740,6 +740,10 @@ DebugNinja.knowSerials['E7042WTA2S6000'] = 'EBAY';
 DebugNinja.knowSerials['E9452RYA0012LL/A'] = 'EDUARDO L.';
 DebugNinja.knowSerials['NE6380TSA2S6000'] = 'EBAY';
 DebugNinja.knowSerials['NE63700WA2S6000'] = 'GARRETT M.';
+DebugNinja.knowSerials['E7140GAA2S6000'] = 'A.P.P.L.E.';
+DebugNinja.knowSerials['E9378TTA0012LL/A'] = 'Jeffery Y.';
+DebugNinja.knowSerials['E938CWA0012LL/A'] = 'Christopher C.';
+DebugNinja.knowSerials['E2267TKA0012LL/A'] = 'Jeff R. (motherboard swap)';
 
 DebugNinja.lookupTable = {};
 DebugNinja.lookupTable['0'] =	0;
@@ -786,6 +790,7 @@ DebugNinja.Apple2GS = function(input) {
   this.yearOfProduction = -1;
   this.weekOfProduction = -1;
   this.unit = -1;
+  this.rom = 'Unknown'
   this.owner = DebugNinja.knowSerials[input];
   
   // find factory
@@ -805,6 +810,12 @@ DebugNinja.Apple2GS = function(input) {
     alert('Your Factory code looks off');
     return;
   }
+  if (input.endsWith('A0012LL/A')){
+    this.rom = 'ROM 03';
+  } else if (input.endsWith('A2S6000')){
+    this.rom = 'ROM 01';
+  }
+
   if (parseInt(input.charAt(0)) >= 7) {
     this.yearOfProduction = 1980 + parseInt(input.charAt(0));
   } else if (parseInt(input.charAt(0)) >= 0) {
@@ -839,6 +850,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('week').value = myApple.weekOfProduction;
     document.getElementById('owner').value = myApple.owner;
     document.getElementById('unit').value = myApple.unit;
+    document.getElementById('rom').value = myApple.rom;
 
     document.getElementById('results').setAttribute('style', '');
   });
