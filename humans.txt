@@ -1,7 +1,6 @@
 /*-=-=-TEAM-=-=-*/
   Software Architect: Jeffery Yeary (usbsnowcrash)
   Site: debug.ninja
-  Twitter: @usbsnowcrash
   Location: Atlanta, GA USA
 
 /*-=-=-SITE-=-=-*/
