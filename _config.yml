@@ -14,7 +14,6 @@ email: 'blog@debug.ninja'
 github_username: 'usbsnowcrash'
 paginate: 5
 title: 'Debug Ninja'
-twitter_handle: '@usbsnowcrash'
 url: 'https://debug.ninja' # the base hostname & protocol for your site
 
 # Blog logo
