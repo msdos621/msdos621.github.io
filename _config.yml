@@ -27,13 +27,6 @@ author_image: "/assets/images/author2.jpg"
 
 # Social icons and sharing options
 social:
-  - icon: twitter
-    url:  https://twitter.com/usbsnowcrash
-    desc: Follow me on twitter
-    share_url: http://twitter.com/share
-    share_title: ?text=
-    share_link: "&amp;url="
-
   - icon: linkedin
     url:  https://www.linkedin.com/in/jefferyyeary
     desc: View my resume on linked in
